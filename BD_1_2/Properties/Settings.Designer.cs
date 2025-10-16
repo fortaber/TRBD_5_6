@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BD_1_2.Properties
+namespace BD_5_6.Properties
 {
 
 

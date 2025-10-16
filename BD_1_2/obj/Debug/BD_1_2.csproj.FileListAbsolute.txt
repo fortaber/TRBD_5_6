@@ -11,3 +11,17 @@ C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.pdb
 C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.exe.config
 C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_appointment.resources
 C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_doctor.resources
+F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe.config
+F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe
+F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.pdb
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.AssemblyReference.cache
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_appointment.resources
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_doctor.resources
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Form1.resources
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Properties.Resources.resources
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.GenerateResource.cache
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.CoreCompileInputs.cache
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.exe
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.pdb
+F:\BD_1_2\BD_1_2\bin\Debug\System.Data.SQLite.dll
+F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.Up2Date

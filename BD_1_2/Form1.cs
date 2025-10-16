@@ -7,18 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using System.IO;
 
 namespace BD_1_2
 {
     public partial class Form1 : Form
     {
+        private SQLiteConnection sqliteConn;
+
         DataSet1 dataset1 = new BD_1_2.DataSet1();
         public Form1()
         {
             InitializeComponent();
             Form1_Load();
+            //sqliteConn = new SQLiteConnection("Data Source=Cinema.db;Version=3;");
+            //sqliteConn.Open();
         }
-  
+
+        /*private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sqliteConn.Close();
+        }*/
+
+
         private void SaveToXML()
         {
             dataset1.Doctor.AcceptChanges();
