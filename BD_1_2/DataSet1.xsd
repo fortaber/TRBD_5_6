@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSet1" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Doctor" msprop:Generator_RowEvHandlerName="DoctorRowChangeEventHandler" msprop:Generator_RowDeletedName="DoctorRowDeleted" msprop:Generator_RowDeletingName="DoctorRowDeleting" msprop:Generator_RowEvArgName="DoctorRowChangeEvent" msprop:Generator_TablePropName="Doctor" msprop:Generator_RowChangedName="DoctorRowChanged" msprop:Generator_UserTableName="Doctor" msprop:Generator_RowChangingName="DoctorRowChanging" msprop:Generator_RowClassName="DoctorRow" msprop:Generator_TableClassName="DoctorDataTable" msprop:Generator_TableVarName="tableDoctor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_doctor" msdata:Caption="Код врача" msprop:Generator_ColumnPropNameInTable="id_doctorColumn" msprop:Generator_ColumnPropNameInRow="id_doctor" msprop:Generator_UserColumnName="id_doctor" msprop:Generator_ColumnVarNameInTable="columnid_doctor" type="xs:unsignedInt" />
+              <xs:element name="doctor_full_name" msdata:Caption="ФИО врача" msprop:Generator_ColumnPropNameInTable="doctor_full_nameColumn" msprop:Generator_ColumnPropNameInRow="doctor_full_name" msprop:Generator_UserColumnName="doctor_full_name" msprop:Generator_ColumnVarNameInTable="columndoctor_full_name" type="xs:string" minOccurs="0" />
+              <xs:element name="date_of_birth" msdata:Caption="Дата рождения" msprop:Generator_ColumnPropNameInTable="date_of_birthColumn" msprop:Generator_ColumnPropNameInRow="date_of_birth" msprop:Generator_UserColumnName="date_of_birth" msprop:Generator_ColumnVarNameInTable="columndate_of_birth" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="id_department" msdata:Caption="Код подразделения" msprop:Generator_ColumnPropNameInTable="id_departmentColumn" msprop:Generator_ColumnPropNameInRow="id_department" msprop:Generator_UserColumnName="id_department" msprop:Generator_ColumnVarNameInTable="columnid_department" type="xs:unsignedInt" minOccurs="0" />
+              <xs:element name="id_position" msdata:Caption="Код должности" msprop:Generator_ColumnPropNameInTable="id_positionColumn" msprop:Generator_ColumnPropNameInRow="id_position" msprop:Generator_UserColumnName="id_position" msprop:Generator_ColumnVarNameInTable="columnid_position" type="xs:unsignedInt" minOccurs="0" />
+              <xs:element name="gender" msdata:Caption="Пол" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_UserColumnName="gender" msprop:Generator_ColumnVarNameInTable="columngender" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Doctor_appointment" msprop:Generator_RowEvHandlerName="Doctor_appointmentRowChangeEventHandler" msprop:Generator_RowDeletedName="Doctor_appointmentRowDeleted" msprop:Generator_RowDeletingName="Doctor_appointmentRowDeleting" msprop:Generator_RowEvArgName="Doctor_appointmentRowChangeEvent" msprop:Generator_TablePropName="Doctor_appointment" msprop:Generator_RowChangedName="Doctor_appointmentRowChanged" msprop:Generator_UserTableName="Doctor_appointment" msprop:Generator_RowChangingName="Doctor_appointmentRowChanging" msprop:Generator_RowClassName="Doctor_appointmentRow" msprop:Generator_TableClassName="Doctor_appointmentDataTable" msprop:Generator_TableVarName="tableDoctor_appointment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_appointment" msdata:Caption="Код приёма" msprop:Generator_ColumnPropNameInTable="id_appointmentColumn" msprop:Generator_ColumnPropNameInRow="id_appointment" msprop:Generator_UserColumnName="id_appointment" msprop:Generator_ColumnVarNameInTable="columnid_appointment" type="xs:unsignedInt" />
+              <xs:element name="patient_full_name" msdata:Caption="ФИО пациента" msprop:Generator_ColumnPropNameInTable="patient_full_nameColumn" msprop:Generator_ColumnPropNameInRow="patient_full_name" msprop:Generator_UserColumnName="patient_full_name" msprop:Generator_ColumnVarNameInTable="columnpatient_full_name" type="xs:string" minOccurs="0" />
+              <xs:element name="patient_date_of_birth" msdata:Caption="Дата рождения пациента" msprop:Generator_ColumnPropNameInTable="patient_date_of_birthColumn" msprop:Generator_ColumnPropNameInRow="patient_date_of_birth" msprop:Generator_UserColumnName="patient_date_of_birth" msprop:Generator_ColumnVarNameInTable="columnpatient_date_of_birth" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fk_id_doctor" msdata:Caption="Код врача" msprop:Generator_ColumnPropNameInTable="fk_id_doctorColumn" msprop:Generator_ColumnPropNameInRow="fk_id_doctor" msprop:Generator_UserColumnName="fk_id_doctor" msprop:Generator_ColumnVarNameInTable="columnfk_id_doctor" type="xs:unsignedInt" minOccurs="0" />
+              <xs:element name="appointment_date" msdata:Caption="Дата приёма" msprop:Generator_ColumnPropNameInTable="appointment_dateColumn" msprop:Generator_ColumnPropNameInRow="appointment_date" msprop:Generator_UserColumnName="appointment_date" msprop:Generator_ColumnVarNameInTable="columnappointment_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="appointment_time" msdata:Caption="Время приёма" msprop:Generator_ColumnPropNameInTable="appointment_timeColumn" msprop:Generator_ColumnPropNameInRow="appointment_time" msprop:Generator_UserColumnName="appointment_time" msprop:Generator_ColumnVarNameInTable="columnappointment_time" type="xs:string" minOccurs="0" />
+              <xs:element name="appointment_report" msdata:Caption="Отчёт о приёме" msprop:Generator_ColumnPropNameInTable="appointment_reportColumn" msprop:Generator_ColumnPropNameInRow="appointment_report" msprop:Generator_UserColumnName="appointment_report" msprop:Generator_ColumnVarNameInTable="columnappointment_report" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="DoctorKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Doctor" />
+      <xs:field xpath="mstns:id_doctor" />
+    </xs:unique>
+    <xs:unique name="Doctor_x0027_s_x0020_appointmentKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Doctor_appointment" />
+      <xs:field xpath="mstns:id_appointment" />
+    </xs:unique>
+    <xs:keyref name="FK_Doctor_x0027_s_x0020_appointment_Doctor" refer="DoctorKey1" msprop:rel_Generator_UserParentTable="Doctor" msprop:rel_Generator_UserChildTable="Doctor_appointment" msprop:rel_Generator_RelationVarName="_relationFK_Doctor_s_appointment_Doctor" msprop:rel_Generator_ChildPropName="GetDoctor_appointmentRows" msprop:rel_Generator_ParentPropName="DoctorRow" msprop:rel_Generator_UserRelationName="FK_Doctor's appointment_Doctor" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:Doctor_appointment" />
+      <xs:field xpath="mstns:fk_id_doctor" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

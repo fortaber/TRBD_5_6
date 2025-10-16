@@ -1,0 +1,13 @@
+C:\DataBaseProjects\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe.config
+C:\DataBaseProjects\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe
+C:\DataBaseProjects\BD_1_2\BD_1_2\bin\Debug\BD_1_2.pdb
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.AssemblyReference.cache
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Form1.resources
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Properties.Resources.resources
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.GenerateResource.cache
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.CoreCompileInputs.cache
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.exe
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.pdb
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.exe.config
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_appointment.resources
+C:\DataBaseProjects\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Edit_doctor.resources
