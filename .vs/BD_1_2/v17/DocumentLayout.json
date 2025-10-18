@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "F:\\BD_1_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\dataset1.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,20 +46,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
               "ToolTip": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
               "RelativeToolTip": "BD_1_2\\Form1.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAUwFcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAiwBEAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-02T19:45:29.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
@@ -79,8 +79,7 @@
               "RelativeToolTip": "BD_1_2\\Edit_appointment.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:28:25.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-21T17:28:25.807Z"
             },
             {
               "$type": "Document",
@@ -91,8 +90,7 @@
               "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_appointment.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "BD_1_2\\Edit_appointment.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:23:18.806Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "WhenOpened": "2025-09-21T17:23:18.806Z"
             },
             {
               "$type": "Document",
@@ -104,8 +102,7 @@
               "RelativeToolTip": "BD_1_2\\Edit_doctor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:21:00.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-21T17:21:00.321Z"
             },
             {
               "$type": "Document",
@@ -116,8 +113,7 @@
               "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_doctor.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "BD_1_2\\Edit_doctor.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:18:02.131Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "WhenOpened": "2025-09-21T17:18:02.131Z"
             },
             {
               "$type": "Document",
@@ -128,8 +124,7 @@
               "ToolTip": "F:\\BD_1_2\\BD_1_2\\DataSet1.xsd",
               "RelativeToolTip": "BD_1_2\\DataSet1.xsd",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003579|",
-              "WhenOpened": "2025-09-20T10:17:26.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-20T10:17:26.823Z"
             }
           ]
         }

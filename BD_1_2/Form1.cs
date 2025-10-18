@@ -14,15 +14,15 @@ namespace BD_1_2
 {
     public partial class Form1 : Form
     {
-        //private SQLiteConnection sqliteConn;
+        const string relativePath = "Cinema.db"; // Отн. путь до БД
+        string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+        private SQLiteConnection sqliteConn;
 
         DataSet1 dataset1 = new BD_1_2.DataSet1();
         public Form1()
         {
             InitializeComponent();
             //Form1_Load();
-            //sqliteConn = new SQLiteConnection("Data Source=Cinema.db;Version=3;");
-            //sqliteConn.Open();
         }
 
         /*private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -82,6 +82,18 @@ namespace BD_1_2
                     dataGrid.FirstDisplayedScrollingRowIndex = row.Index;
                     return;
                 }
+            }
+        }
+
+        private void ConnectToDB_Click(object sender, EventArgs e)
+        {
+            sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;");
+            try
+            {
+                sqliteConn.Open();
+            }
+            catch (Exception ex) { 
+                
             }
         }
 

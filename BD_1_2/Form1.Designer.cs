@@ -50,6 +50,7 @@
             this.WinsHorisontal = new System.Windows.Forms.ToolStripTextBox();
             this.WinsVertical = new System.Windows.Forms.ToolStripTextBox();
             this.WinsCloseAll = new System.Windows.Forms.ToolStripTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)(this.doctorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource)).BeginInit();
@@ -98,6 +99,7 @@
             // 
             // FileStripMenu
             // 
+            this.FileStripMenu.CheckOnClick = true;
             this.FileStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConnectToDB,
             this.CloseConnection,
@@ -110,13 +112,16 @@
             // 
             this.ConnectToDB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ConnectToDB.Name = "ConnectToDB";
+            this.ConnectToDB.ReadOnly = true;
             this.ConnectToDB.Size = new System.Drawing.Size(130, 23);
             this.ConnectToDB.Text = "Подключиться к БД";
+            this.ConnectToDB.Click += new System.EventHandler(this.ConnectToDB_Click);
             // 
             // CloseConnection
             // 
             this.CloseConnection.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.CloseConnection.Name = "CloseConnection";
+            this.CloseConnection.ReadOnly = true;
             this.CloseConnection.Size = new System.Drawing.Size(130, 23);
             this.CloseConnection.Text = "Закрыть соединение";
             // 
@@ -124,6 +129,7 @@
             // 
             this.Exit.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Exit.Name = "Exit";
+            this.Exit.ReadOnly = true;
             this.Exit.Size = new System.Drawing.Size(100, 23);
             this.Exit.Text = "Выйти";
             // 
@@ -139,6 +145,7 @@
             // 
             this.OpenTableTickets.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.OpenTableTickets.Name = "OpenTableTickets";
+            this.OpenTableTickets.ReadOnly = true;
             this.OpenTableTickets.Size = new System.Drawing.Size(160, 23);
             this.OpenTableTickets.Text = "Открыть таблицу \"Билеты\"";
             // 
@@ -156,6 +163,7 @@
             // 
             this.ReportWord.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ReportWord.Name = "ReportWord";
+            this.ReportWord.ReadOnly = true;
             this.ReportWord.Size = new System.Drawing.Size(170, 23);
             this.ReportWord.Text = "Сформировать отчет Word";
             // 
@@ -163,6 +171,7 @@
             // 
             this.ReportExcel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ReportExcel.Name = "ReportExcel";
+            this.ReportExcel.ReadOnly = true;
             this.ReportExcel.Size = new System.Drawing.Size(170, 23);
             this.ReportExcel.Text = "Сформировать отчет Excel";
             // 
@@ -170,6 +179,7 @@
             // 
             this.ReportPDF.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ReportPDF.Name = "ReportPDF";
+            this.ReportPDF.ReadOnly = true;
             this.ReportPDF.Size = new System.Drawing.Size(170, 23);
             this.ReportPDF.Text = "Сформировать отчет PDF";
             // 
@@ -188,6 +198,7 @@
             // 
             this.WinsCascade.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.WinsCascade.Name = "WinsCascade";
+            this.WinsCascade.ReadOnly = true;
             this.WinsCascade.Size = new System.Drawing.Size(100, 23);
             this.WinsCascade.Text = "Окна каскадом";
             // 
@@ -195,6 +206,7 @@
             // 
             this.WinsHorisontal.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.WinsHorisontal.Name = "WinsHorisontal";
+            this.WinsHorisontal.ReadOnly = true;
             this.WinsHorisontal.Size = new System.Drawing.Size(100, 23);
             this.WinsHorisontal.Text = "По горизонтали";
             // 
@@ -202,6 +214,7 @@
             // 
             this.WinsVertical.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.WinsVertical.Name = "WinsVertical";
+            this.WinsVertical.ReadOnly = true;
             this.WinsVertical.Size = new System.Drawing.Size(100, 23);
             this.WinsVertical.Text = "По вертикали";
             // 
@@ -209,14 +222,24 @@
             // 
             this.WinsCloseAll.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.WinsCloseAll.Name = "WinsCloseAll";
+            this.WinsCloseAll.ReadOnly = true;
             this.WinsCloseAll.Size = new System.Drawing.Size(110, 23);
             this.WinsCloseAll.Text = "Закрыть все окна";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 491);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1043, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 513);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -258,5 +281,6 @@
         private System.Windows.Forms.ToolStripTextBox WinsHorisontal;
         private System.Windows.Forms.ToolStripTextBox WinsVertical;
         private System.Windows.Forms.ToolStripTextBox WinsCloseAll;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
