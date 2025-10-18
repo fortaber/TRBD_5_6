@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.doctorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new BD_1_2.DataSet1();
-            this.doctorappointmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.doctorappointmentBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.doctorappointmentBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ConnectToDB = new System.Windows.Forms.ToolStripTextBox();
@@ -50,39 +44,11 @@
             this.WinsHorisontal = new System.Windows.Forms.ToolStripTextBox();
             this.WinsVertical = new System.Windows.Forms.ToolStripTextBox();
             this.WinsCloseAll = new System.Windows.Forms.ToolStripTextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource2)).BeginInit();
+            this.statusBar = new System.Windows.Forms.StatusStrip();
+            this.statusBarField1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // doctorBindingSource
-            // 
-            this.doctorBindingSource.DataMember = "Doctor";
-            this.doctorBindingSource.DataSource = this.dataSet1;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // doctorappointmentBindingSource
-            // 
-            this.doctorappointmentBindingSource.DataMember = "Doctor_appointment";
-            this.doctorappointmentBindingSource.DataSource = this.dataSet1;
-            // 
-            // doctorappointmentBindingSource1
-            // 
-            this.doctorappointmentBindingSource1.DataMember = "Doctor_appointment";
-            this.doctorappointmentBindingSource1.DataSource = this.dataSet1;
-            // 
-            // doctorappointmentBindingSource2
-            // 
-            this.doctorappointmentBindingSource2.DataMember = "Doctor_appointment";
-            this.doctorappointmentBindingSource2.DataSource = this.dataSet1;
             // 
             // menuStrip1
             // 
@@ -148,6 +114,7 @@
             this.OpenTableTickets.ReadOnly = true;
             this.OpenTableTickets.Size = new System.Drawing.Size(160, 23);
             this.OpenTableTickets.Text = "Открыть таблицу \"Билеты\"";
+            this.OpenTableTickets.Click += new System.EventHandler(this.OpenTableTickets_Click);
             // 
             // ReportsToolStripMenu
             // 
@@ -225,46 +192,46 @@
             this.WinsCloseAll.ReadOnly = true;
             this.WinsCloseAll.Size = new System.Drawing.Size(110, 23);
             this.WinsCloseAll.Text = "Закрыть все окна";
+            this.WinsCloseAll.Click += new System.EventHandler(this.WinsCloseAll_Click);
             // 
-            // statusStrip1
+            // statusBar
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 491);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1043, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusBarField1});
+            this.statusBar.Location = new System.Drawing.Point(0, 491);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(1043, 22);
+            this.statusBar.TabIndex = 2;
+            this.statusBar.Text = "statusStrip1";
+            // 
+            // statusBarField1
+            // 
+            this.statusBarField1.Name = "statusBarField1";
+            this.statusBarField1.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 513);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusBar);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1050, 550);
             this.Name = "Form1";
             this.Text = "Управление базой данных";
-            ((System.ComponentModel.ISupportInitialize)(this.doctorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.doctorappointmentBindingSource2)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.BindingSource doctorBindingSource;
-        private DataSet1 dataSet1;
-        private System.Windows.Forms.BindingSource doctorappointmentBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn appointmentdurationDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource doctorappointmentBindingSource1;
-        private System.Windows.Forms.BindingSource doctorappointmentBindingSource2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem FileStripMenu;
         private System.Windows.Forms.ToolStripTextBox ConnectToDB;
@@ -281,6 +248,7 @@
         private System.Windows.Forms.ToolStripTextBox WinsHorisontal;
         private System.Windows.Forms.ToolStripTextBox WinsVertical;
         private System.Windows.Forms.ToolStripTextBox WinsCloseAll;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusBar;
+        private System.Windows.Forms.ToolStripStatusLabel statusBarField1;
     }
 }

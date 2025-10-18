@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "F:\\BD_1_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\dataset1.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\dataset1.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\edit_doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\edit_doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\edit_appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|F:\\BD_1_2\\bd_1_2\\edit_doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\edit_doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|f:\\bd_1_2\\bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\BD_1_2.csproj|solutionrelative:bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,9 +38,9 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
-              "RelativeToolTip": "BD_1_2\\Form1.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAiwF8AAAAQAAAAAAAAAA==",
+              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Form1.cs*",
+              "RelativeToolTip": "BD_1_2\\Form1.cs*",
+              "ViewState": "AgIAADkAAAAAAAAAAAAUwE4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-02T19:45:29.981Z",
               "EditorCaption": ""
@@ -63,68 +51,36 @@
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "BD_1_2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
+              "RelativeToolTip": "BD_1_2\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-21T17:42:34.242Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Edit_appointment.cs",
-              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Edit_appointment.cs",
-              "RelativeDocumentMoniker": "BD_1_2\\Edit_appointment.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_appointment.cs",
-              "RelativeToolTip": "BD_1_2\\Edit_appointment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TableForm.cs",
+              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\TableForm.cs",
+              "RelativeDocumentMoniker": "BD_1_2\\TableForm.cs",
+              "ToolTip": "F:\\BD_1_2\\BD_1_2\\TableForm.cs",
+              "RelativeToolTip": "BD_1_2\\TableForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:28:25.807Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Edit_appointment.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Edit_appointment.cs",
-              "RelativeDocumentMoniker": "BD_1_2\\Edit_appointment.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_appointment.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "BD_1_2\\Edit_appointment.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:23:18.806Z"
+              "WhenOpened": "2025-10-18T17:49:23.257Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Edit_doctor.cs",
-              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Edit_doctor.cs",
-              "RelativeDocumentMoniker": "BD_1_2\\Edit_doctor.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_doctor.cs",
-              "RelativeToolTip": "BD_1_2\\Edit_doctor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
+              "Title": "TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\TableForm.cs",
+              "RelativeDocumentMoniker": "BD_1_2\\TableForm.cs",
+              "ToolTip": "F:\\BD_1_2\\BD_1_2\\TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "BD_1_2\\TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:21:00.321Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Edit_doctor.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\Edit_doctor.cs",
-              "RelativeDocumentMoniker": "BD_1_2\\Edit_doctor.cs",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\Edit_doctor.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "BD_1_2\\Edit_doctor.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-21T17:18:02.131Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DataSet1.xsd",
-              "DocumentMoniker": "F:\\BD_1_2\\BD_1_2\\DataSet1.xsd",
-              "RelativeDocumentMoniker": "BD_1_2\\DataSet1.xsd",
-              "ToolTip": "F:\\BD_1_2\\BD_1_2\\DataSet1.xsd",
-              "RelativeToolTip": "BD_1_2\\DataSet1.xsd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003579|",
-              "WhenOpened": "2025-09-20T10:17:26.823Z"
+              "WhenOpened": "2025-10-18T17:45:15.696Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
         }

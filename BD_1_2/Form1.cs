@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace BD_1_2
 {
@@ -18,47 +12,15 @@ namespace BD_1_2
         string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
         private SQLiteConnection sqliteConn;
 
-        DataSet1 dataset1 = new BD_1_2.DataSet1();
         public Form1()
         {
             InitializeComponent();
-            //Form1_Load();
         }
 
-        /*private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        // метод для установки статуса внизу формы
+        private void WriteStatus(string status)
         {
-            sqliteConn.Close();
-        }*/
-
-
-        private void SaveToXML()
-        {
-            dataset1.Doctor.AcceptChanges();
-            dataset1.Doctor_appointment.AcceptChanges();
-            string filePath = "Data.xml";
-            dataset1.WriteXml(filePath);
-        }
-        //private void Form1_Load()
-        //{
-
-        //    LoadFromXML();
-        //    dataGridView1.DataSource = dataset1.Doctor;
-        //    dataGridView2.DataSource = dataset1.Doctor_appointment;
-        //    dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
-            
-        //}
-
-        private void LoadFromXML()
-        {
-            string filePath = "Data.xml";
-            dataset1.Clear();
-            if (!System.IO.File.Exists(filePath))
-            {
-                dataset1.WriteXml(filePath);
-            }
-
-            dataset1.Clear();
-            dataset1.ReadXml(filePath);
+            statusBarField1.Text = status;
         }
 
         private void SelectRow(DataGridView dataGrid, int bIndex)
@@ -87,13 +49,35 @@ namespace BD_1_2
 
         private void ConnectToDB_Click(object sender, EventArgs e)
         {
-            sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;");
-            try
+            using (SQLiteConnection sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;"))
             {
-                sqliteConn.Open();
+                try
+                {
+                    sqliteConn.Open();
+                    WriteStatus("БД открыта");
+                }
+                catch (Exception ex)
+                {
+                    File.AppendAllText(".txt", "error " + ex);
+                }
             }
-            catch (Exception ex) { 
-                
+        }
+
+        private void OpenTableTickets_Click(object sender, EventArgs e)
+        {
+            TableForm tableForm = new TableForm();
+            tableForm.MdiParent = this;
+            tableForm.Text += " Билеты";
+            WriteStatus("Открыта таблица Билеты");
+            tableForm.Show();
+        }
+
+        private void WinsCloseAll_Click(object sender, EventArgs e)
+        {
+            foreach(Form form in MdiChildren)
+            {
+                WriteStatus("Все окна закрыты");
+                form.Close();
             }
         }
 
