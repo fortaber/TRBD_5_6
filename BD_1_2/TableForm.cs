@@ -1,66 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace MyDatabase
 {
     public partial class TableForm : Form
     {
-        // у каждой таблицы свой id для запрета открытия одинаковых таблиц
-        // задается в конструторе
-        // "билет" = 0, "Сеанс" = 1, ...
-        public int id;
-        Form1 parentForm;
+        public string tableNameDB;
+        private SQLiteConnection sqliteConn = new SQLiteConnection();
+        private SQLiteDataAdapter adapter;
+        private SQLiteCommand command = new SQLiteCommand();
+        private DataTable dt = new DataTable();
 
-        public TableForm(Form1 form, int id)
+        int CurrentIndex = 0;
+
+        public TableForm(string connString, string tableName)
         {
             InitializeComponent();
-            this.parentForm = form;
-            this.id = id;
-            addColumns(id);
+            this.sqliteConn.ConnectionString = connString;
+            this.Name = tableName;
+            this.Text += tableName;
+            addColumns(tableName);
         }
 
-        void addColumns(int id)
+        void addColumns(string tableName)
         {
-            string[] colNames;
             string query;
-            switch (id)
+            switch (tableName)
             {
-                case 0:
-                    colNames = new string[] { "ID", "Номер сеанса", "Номер места", "Номер покупателя", "Куплен", "Дата покупки"};
+                case "Билеты":
+                    //"ID", "Номер сеанса", "Номер места", "Номер покупателя", "Куплен", "Дата покупки";
                     query = "SELECT * from Tickets";
+                    // сложный запрос пока легче заняться простыми
+                    tableNameDB = "Tickets";
+                    break;
+                case "Кинозалы":
+                    query = "SELECT id_cinema_hall, hall_type AS \"Тип зала\", row_number AS \"Кол-во рядов\", " +
+                            "seat_number_in_row AS \"Кол-во мест в ряду\", available AS \"Доступен\"" +
+                            "FROM [Cinema Halls] INNER JOIN Hall_types ON id_hall_type == fk_id_hall_type";
+                    tableNameDB = "Cinema Halls";
+                    break;
+                case "Клиенты":
+                    query = "SELECT id_client, client_full_name AS \"ФИО\", client_date_of_birth AS \"Дата рождения\"," +
+                            "phone AS \"Телефон\", email AS \"эл.почта\" FROM Clients";
+                    tableNameDB = "Clients";
                     break;
                 default:
                     this.Close();
                     return;
             }
 
-            // авто заполнение таблицы
-            var dataAdapter = new SQLiteDataAdapter(query, parentForm.sqliteConn);
-            BindingSource bindingSource1 = new BindingSource();
-            dataGridView1.DataSource = bindingSource1;
-            {
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-                dataAdapter.Fill(table);
-                bindingSource1.DataSource = table;
+            // автозаполнение таблицы
+            var adapter = new SQLiteDataAdapter(query, sqliteConn);
+            adapter.Fill(dt);
+            dataGridView1.DataSource = dt;
 
-                dataGridView1.AutoResizeColumns(
-                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            }
-            dataGridView1.Columns[0].Visible = false; // скрыть 1й столбец с ID
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            // скрытие столбцов с id
+            switch (tableName)
             {
-                dataGridView1.Columns[i].HeaderText = colNames[i];
+                case "Билеты":
+                    dataGridView1.Columns["id_ticket"].Visible = false;
+                    break;
+                case "Кинозалы":
+                    dataGridView1.Columns["id_cinema_hall"].Visible = false;
+                    break;
+                case "Клиенты":
+                    dataGridView1.Columns["id_client"].Visible = false;
+                    break;
+                default:
+                    this.Close();
+                    return;
             }
         }
 

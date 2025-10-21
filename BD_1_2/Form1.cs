@@ -12,11 +12,13 @@ namespace MyDatabase
         const string relativePath = "Cinema.db"; // Отн. путь до БД
         string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
         public SQLiteConnection sqliteConn;
+        private string connString;
 
         public Form1()
         {
             InitializeComponent();
-            sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;");
+            connString = $"Data Source={fullPath};Version=3;";
+            sqliteConn = new SQLiteConnection(connString);
         }
 
         // метод для установки статуса внизу формы
@@ -76,13 +78,15 @@ namespace MyDatabase
             }
         }*/
 
-        private void OpenTableTickets_Click(object sender, EventArgs e)
+        private void OpenTable_Click(object sender, EventArgs e)
         {
+            string table = (sender as ToolStripMenuItem).Text;
+
             // проверка что это окно таблицы уже не открыто
             bool alreadyOpened = false;
             foreach(TableForm form in this.MdiChildren)
             {
-                if (form.id == 0)
+                if (form.Name == table)
                 {
                     alreadyOpened = true;
                     break;
@@ -91,11 +95,10 @@ namespace MyDatabase
 
             if (!alreadyOpened) 
             {            
-                TableForm tableForm = new TableForm(this, 0);
+                TableForm tableForm = new TableForm(connString, table);
                 tableForm.MdiParent = this;
-                tableForm.Text += " Билеты";
                 tableForm.Show();
-                WriteStatus("Открыта таблица Билеты");
+                WriteStatus("Открыта таблица " + table);
             }
         }
 
@@ -117,6 +120,16 @@ namespace MyDatabase
         private void Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void WinsHorisontal_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+
+        private void WinsVertical_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
         }
     }
 }
