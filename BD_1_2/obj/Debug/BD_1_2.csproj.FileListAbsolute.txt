@@ -15,7 +15,6 @@ F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe.config
 F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.exe
 F:\BD_1_2\BD_1_2\bin\Debug\BD_1_2.pdb
 F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.AssemblyReference.cache
-F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Form1.resources
 F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.Properties.Resources.resources
 F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.GenerateResource.cache
 F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.csproj.CoreCompileInputs.cache
@@ -30,4 +29,5 @@ F:\BD_1_2\BD_1_2\bin\Debug\System.Data.SQLite.Linq.dll
 F:\BD_1_2\BD_1_2\bin\Debug\EntityFramework.xml
 F:\BD_1_2\BD_1_2\bin\Debug\EntityFramework.SqlServer.xml
 F:\BD_1_2\BD_1_2\bin\Debug\System.Data.SQLite.xml
-F:\BD_1_2\BD_1_2\obj\Debug\BD_1_2.TableForm.resources
+F:\BD_1_2\BD_1_2\obj\Debug\MyDatabase.Form1.resources
+F:\BD_1_2\BD_1_2\obj\Debug\MyDatabase.TableForm.resources

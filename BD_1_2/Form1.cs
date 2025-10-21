@@ -4,17 +4,19 @@ using System.Data.SQLite;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace BD_1_2
+
+namespace MyDatabase
 {
     public partial class Form1 : Form
     {
         const string relativePath = "Cinema.db"; // Отн. путь до БД
         string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
-        private SQLiteConnection sqliteConn;
+        public SQLiteConnection sqliteConn;
 
         public Form1()
         {
             InitializeComponent();
+            sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;");
         }
 
         // метод для установки статуса внизу формы
@@ -23,53 +25,78 @@ namespace BD_1_2
             statusBarField1.Text = status;
         }
 
-        private void SelectRow(DataGridView dataGrid, int bIndex)
-        {
-            if (bIndex >= 0 && bIndex < dataGrid.Rows.Count)
-            {
-                dataGrid.CurrentCell = dataGrid.Rows[bIndex].Cells[2];
-                dataGrid.Rows[bIndex].Selected = true;
-                dataGrid.FirstDisplayedScrollingRowIndex = bIndex;
-            }
-        }
 
-        private void SelectRowId(DataGridView dataGrid, UInt32 id)
-        {
-            foreach (DataGridViewRow row in dataGrid.Rows)
-            {
-                if (row.Cells[0].Value != null && Convert.ToInt32(row.Cells[0].Value) == id)
-                {
-                    dataGrid.CurrentCell = row.Cells[2];
-                    row.Selected = true;
-                    dataGrid.FirstDisplayedScrollingRowIndex = row.Index;
-                    return;
-                }
-            }
-        }
-
+        // подключаться только при запросе/изменении БД, не держать соед. открытым
         private void ConnectToDB_Click(object sender, EventArgs e)
         {
-            using (SQLiteConnection sqliteConn = new SQLiteConnection($"Data Source={fullPath};Version=3;"))
+            try
             {
-                try
-                {
-                    sqliteConn.Open();
-                    WriteStatus("БД открыта");
-                }
-                catch (Exception ex)
-                {
-                    File.AppendAllText(".txt", "error " + ex);
-                }
+                sqliteConn.Open();
+                WriteStatus("Подключение к БД выполнено успешно");
+            }
+            catch (Exception ex)
+            {
+                WriteStatus("Не удалось выполнить подключение к БД");
+                File.AppendAllText("!t.txt", "\nERROR: " + ex + "\n");
+            }
+            finally { 
+                sqliteConn.Close(); 
             }
         }
+
+        /*public void DBSendQuery(string query) {
+            try
+            {
+                sqliteConn.Open();
+                SQLiteCommand sqlComm = sqliteConn.CreateCommand();
+                sqlComm.CommandText = "SELECT * FROM Tickets";
+                SQLiteDataReader reader = sqlComm.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var d1 = reader.GetInt32(0);
+                        var d2 = reader.GetInt32(1);
+                        var d3 = reader.GetInt32(2);
+                        var d4 = reader.GetInt32(3);
+                        var d5 = reader.GetInt32(4);
+                        var d6 = reader.GetString(5);
+                        File.AppendAllText("!t.txt", d1+" "+d2+" "+d3+" "+d4+" "+d5+" "+d6 + "\n");
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                File.AppendAllText("!t.txt", "\nERROR: " + ex +"\n");
+            }
+            finally
+            {
+                sqliteConn.Close();
+            }
+        }*/
 
         private void OpenTableTickets_Click(object sender, EventArgs e)
         {
-            TableForm tableForm = new TableForm();
-            tableForm.MdiParent = this;
-            tableForm.Text += " Билеты";
-            WriteStatus("Открыта таблица Билеты");
-            tableForm.Show();
+            // проверка что это окно таблицы уже не открыто
+            bool alreadyOpened = false;
+            foreach(TableForm form in this.MdiChildren)
+            {
+                if (form.id == 0)
+                {
+                    alreadyOpened = true;
+                    break;
+                }
+            }
+
+            if (!alreadyOpened) 
+            {            
+                TableForm tableForm = new TableForm(this, 0);
+                tableForm.MdiParent = this;
+                tableForm.Text += " Билеты";
+                tableForm.Show();
+                WriteStatus("Открыта таблица Билеты");
+            }
         }
 
         private void WinsCloseAll_Click(object sender, EventArgs e)
@@ -82,109 +109,14 @@ namespace BD_1_2
         }
 
 
-        //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentCell != null && dataGridView2.DataSource != null)
-        //    {
-        //        dataGridView2.DataSource = dataset1.Doctor_appointment;
-        //        (dataGridView2.DataSource as DataTable).DefaultView.RowFilter = String.Format("fk_id_doctor = {0}", dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
-        //    }
+        private void WinsCascade_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
 
-        //}
-
-
-        //private void AddDoctor_Click(object sender, EventArgs e)
-        //{
-        //    Edit_doctor Add_D = new Edit_doctor(dataset1, true);
-        //    Add_D.ShowDialog();
-        //    SaveToXML();
-        //    dataGridView1.DataSource = null;
-        //    dataGridView1.DataSource = dataset1.Doctor;
-        //    SelectRowId(dataGridView1, Add_D.NewId);
-        //}
-
-        //private void EditDoctor_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentRow != null)
-        //    {
-        //        UInt32 editId = Convert.ToUInt32(dataGridView1.CurrentRow.Cells[0].Value);
-        //        Edit_doctor Add_D = new Edit_doctor(dataset1, false, editId);
-        //        Add_D.ShowDialog();
-        //        SaveToXML();
-        //    }
-        //}
-        //private void DeleteDoctor_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentRow != null)
-        //    {
-        //        DialogResult result = MessageBox.Show(
-        //            "Вы действительно хотите удалить выбранного доктора?",
-        //            "Подтверждение удаления",
-        //            MessageBoxButtons.YesNo,
-        //            MessageBoxIcon.Question,
-        //            MessageBoxDefaultButton.Button2);
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            UInt32 rowId = Convert.ToUInt32(dataGridView1.CurrentRow.Cells[0].Value);
-        //            DataRow[] rows = dataset1.Doctor_appointment.Select($"fk_id_doctor = {rowId}");
-        //            if (rows.Length == 0)
-        //            {
-        //                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-        //                SaveToXML();
-        //                SelectRow(dataGridView1, 0);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Нельзя удалить доктора с приёмами", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void AddAppointment_Click(object sender, EventArgs e)
-        //{
-        //    Edit_appointment Add_a = new Edit_appointment(dataset1, true);
-        //    Add_a.ShowDialog();
-        //    SaveToXML();
-        //    dataGridView2.DataSource = null;
-        //    dataGridView2.DataSource = dataset1.Doctor_appointment;
-        //    SelectRowId(dataGridView2, Add_a.NewId);
-        //}
-
-
-
-        //private void EditAppointment_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView2.CurrentRow != null)
-        //    {
-        //        UInt32 editId = Convert.ToUInt32(dataGridView2.CurrentRow.Cells[0].Value);
-        //        Edit_appointment Add_a = new Edit_appointment(dataset1, false, editId);
-        //        Add_a.ShowDialog();
-        //        SaveToXML();
-        //    }
-        //}
-
-        //private void DeleteAppointment_Click(object sender, EventArgs e)
-        //{
-
-        //    if (dataGridView2.CurrentRow != null)
-        //    {
-        //        // Подтверждение удаления
-        //        DialogResult result = MessageBox.Show(
-        //            "Вы действительно хотите удалить выбранный приём?",
-        //            "Подтверждение удаления",
-        //            MessageBoxButtons.YesNo,
-        //            MessageBoxIcon.Question,
-        //            MessageBoxDefaultButton.Button2);
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            UInt32 rowId = Convert.ToUInt32(dataGridView2.CurrentRow.Cells[0].Value);
-        //            dataGridView2.Rows.Remove(dataGridView2.CurrentRow);
-        //            SaveToXML();
-        //            SelectRow(dataGridView2, 0);
-        //        }
-        //    }
-        //}
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

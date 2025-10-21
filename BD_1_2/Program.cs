@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BD_1_2
+namespace MyDatabase
 {
     internal static class Program
     {

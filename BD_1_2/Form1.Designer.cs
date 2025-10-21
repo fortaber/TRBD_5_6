@@ -1,4 +1,4 @@
-﻿namespace BD_1_2
+﻿namespace MyDatabase
 {
     partial class Form1
     {
@@ -98,6 +98,7 @@
             this.Exit.ReadOnly = true;
             this.Exit.Size = new System.Drawing.Size(100, 23);
             this.Exit.Text = "Выйти";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // TablesToolStripMenu
             // 
@@ -168,6 +169,7 @@
             this.WinsCascade.ReadOnly = true;
             this.WinsCascade.Size = new System.Drawing.Size(100, 23);
             this.WinsCascade.Text = "Окна каскадом";
+            this.WinsCascade.Click += new System.EventHandler(this.WinsCascade_Click);
             // 
             // WinsHorisontal
             // 
