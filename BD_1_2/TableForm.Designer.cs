@@ -122,7 +122,6 @@
             // search_textbox
             // 
             this.search_textbox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.search_textbox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.search_textbox.Name = "search_textbox";
             this.search_textbox.Size = new System.Drawing.Size(80, 37);
             // 

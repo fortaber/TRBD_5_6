@@ -137,7 +137,20 @@ namespace BD_1_2
             {
                 case "text":
                     if (columnName.Contains("date"))
-                        return new DateTimePicker();
+                    {
+                        DateTimePicker dtp = new DateTimePicker();
+
+                        if (columnName == "client_date_of_birth")
+                            dtp.MinDate = new DateTime(1900, 1, 1);
+                        else
+                            dtp.MinDate = new DateTime(2020, 1, 1);
+
+                        if (columnName == "buy_date" || columnName == "client_date_of_birth")
+                            dtp.MaxDate = DateTime.Now;
+                        else
+                            dtp.MaxDate = new DateTime(2100, 1, 1); // для date_session
+                        return dtp;
+                    }
                     if (columnName.Contains("time"))
                     {
                         DateTimePicker dtp = new DateTimePicker();
@@ -189,7 +202,7 @@ namespace BD_1_2
 
             string currentText = currentTextBox.Text;
 
-            // Проверяем корректность введенного текста
+            // Проверяем что это почта
             if (!IsValidEmail(currentText))
             {
                 currentTextBox.Text = "";
@@ -359,7 +372,9 @@ namespace BD_1_2
                 {
                     foreach (Control control in this.Controls)
                     {
-                        if (control.Name == "id" || control.Name.EndsWith("_id"))
+                        if (control.Name == "id" || control.Name.EndsWith("_id") ||
+                            control.Name == "Ok" || control.Name == "Cancel" ||
+                            control.Name == "")
                             continue;
 
                         string fieldName = control.Name;
@@ -394,8 +409,17 @@ namespace BD_1_2
                 numericUpDown.Value = Convert.ToDecimal(value);
             else if (control is DateTimePicker dateTimePicker)
             {
-                if (DateTime.TryParse(value.ToString(), out DateTime dateValue))
-                    dateTimePicker.Value = dateValue;
+                if (control.Name.Contains("time"))
+                {
+                    if (DateTime.TryParseExact(value.ToString(), "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateValue))
+                        dateTimePicker.Value = dateValue;
+                }
+                else
+                {
+                    if (DateTime.TryParseExact(value.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateValue))
+                        dateTimePicker.Value = dateValue;
+                }
+
             }
             else if (control is CheckBox checkBox)
                 checkBox.Checked = Convert.ToBoolean(value);
@@ -413,39 +437,42 @@ namespace BD_1_2
                     }
                 }
             }
+            else if (control is MaskedTextBox maskedTextBox)
+            {
+                maskedTextBox.Text = value.ToString();
+            }
         }
 
         private void Ok_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            bool success = false;
+            try
+            {
+                if (isInsForm)
+                {
+                    success = InsertRecord();
+                }
+                else
+                {
+                    success = UpdateRecord();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка");
+            }
+
+            if (success)
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
 
-        private bool SaveData()
-        {
-            try
-            {
-                if (isInsForm)
-                {
-                    return InsertRecord();
-                }
-                else
-                {
-                    return UpdateRecord();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка");
-                return false;
-            }
-        }
-
         private bool InsertRecord()
         {
+            if (!checkSeatsTable()) return false;
+
             try
             {
                 List<string> columns = new List<string>();
@@ -501,6 +528,7 @@ namespace BD_1_2
 
         private bool UpdateRecord()
         {
+            if (!checkSeatsTable()) return false;
             try
             {
                 List<string> setClauses = new List<string>();
@@ -554,6 +582,7 @@ namespace BD_1_2
             }
         }
 
+
         private string GetControlValue(Control control)
         {
             if (control is TextBox textBox)
@@ -566,7 +595,10 @@ namespace BD_1_2
             }
             else if (control is DateTimePicker dateTimePicker)
             {
-                return $"'{dateTimePicker.Value:yyyy-MM-dd}'";
+                if (control.Name.Contains("time"))
+                    return $"'{dateTimePicker.Value:HH:mm}'";
+                else
+                    return $"'{dateTimePicker.Value:yyyy-MM-dd}'";
             }
             else if (control is CheckBox checkBox)
             {
@@ -586,12 +618,67 @@ namespace BD_1_2
             }
             else if (control is MaskedTextBox maskedTextBox)
             {
-                return maskedTextBox.Text;
+                return $"\"{maskedTextBox.Text}\"";
             }
             else
             {
                 return "NULL";
             }
+        }
+
+        bool checkSeatsTable()
+        {
+            int seat = -1;
+            int row = -1;
+            int hall_id = -1;
+
+            int row_n;
+            int seat_n;
+            foreach (Control control in Controls)
+            {
+                
+                if (control.Name == "seat_in_row")
+                    seat = int.Parse(control.Text);
+                if (control.Name == "row")
+                    row = int.Parse(control.Text);
+                if (control.Name == "fk_id_cinema_hall")
+                    hall_id = int.Parse(control.Text);
+            }
+            if (seat == -1 || row == -1 || hall_id == -1) return false;
+
+            string query = $"SELECT seat_number_in_row, row_number FROM \"Cinema_Halls\" WHERE id_cinema_hall == {hall_id}";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(query, sqliteConn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                Dictionary<string, object> valueMap = new Dictionary<string, object>();
+
+                if (reader.Read())
+                {
+                    row_n = int.Parse(reader["row_number"].ToString());
+                    seat_n = int.Parse(reader["seat_number_in_row"].ToString());
+                }
+                else return false;
+                    reader.Close();
+
+                if (seat > seat_n)
+                {
+                    MessageBox.Show($"Номер места больше максимального {seat_n} для зала {hall_id}");
+                    return false;
+                }
+                if (row > row_n)
+                {
+                    MessageBox.Show($"Номер ряда больше максимального {row_n} для зала {hall_id}");
+                    return false;
+                }
+            }
+            catch
+            {
+            }
+
+            return true;
         }
 
         private void Cancel_Click(object sender, EventArgs e)
