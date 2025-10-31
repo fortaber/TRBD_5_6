@@ -2,24 +2,36 @@
 using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
-
+using BD_1_2;
 
 namespace MyDatabase
 {
     public partial class TableForm : Form
     {
         public string tableNameDB;
-        private SQLiteConnection sqliteConn = new SQLiteConnection();
+        private SQLiteConnection sqliteConn;
         private SQLiteDataAdapter adapter;
         private SQLiteCommand command = new SQLiteCommand();
         private DataTable dt = new DataTable();
-
+        private DataTable dtOriginal = new DataTable();
+        private string query;
         int CurrentIndex = 0;
 
-        public TableForm(string connString, string tableName)
+        public TableForm(SQLiteConnection connection, string tableName)
         {
             InitializeComponent();
-            this.sqliteConn.ConnectionString = connString;
+            if (connection == null || connection.State != ConnectionState.Open)
+            {
+                MessageBox.Show("Нет подключения к базе данных!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+            using (var cmd = new SQLiteCommand("PRAGMA foreign_keys = ON;", connection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            this.sqliteConn = connection;
             this.Name = tableName;
             this.Text += tableName;
             addColumns(tableName);
@@ -27,182 +39,380 @@ namespace MyDatabase
 
         void addColumns(string tableName)
         {
-            string query;
             switch (tableName)
             {
                 case "Билеты":
-                    //"ID", "Номер сеанса", "Номер места", "Номер покупателя", "Куплен", "Дата покупки";
-                    query = "SELECT * from Tickets";
-                    // сложный запрос пока легче заняться простыми
+                    query = @"SELECT 
+                Tickets.id_ticket as 'ID',
+                Movies.name as 'Фильм',
+                Sessions.date_session as 'Дата сеанса',
+                Sessions.start_time as 'Время начала',
+                Sessions.id_session as 'Номер сеанса',
+                Seats.row as 'Ряд',
+                Seats.seat_in_row as 'Место',
+                Clients.client_full_name as 'Клиент',
+                Tickets.buy_date as 'Дата покупки',
+                CASE WHEN Tickets.status = 1 THEN 'Куплен' ELSE 'Не куплен' END as 'Статус'
+            FROM Tickets
+            LEFT JOIN Sessions ON Tickets.fk_id_session = Sessions.id_session
+            LEFT JOIN Movies ON Sessions.fk_id_movie = Movies.id_movie
+            LEFT JOIN Seats ON Tickets.fk_id_seat = Seats.id_seat
+            LEFT JOIN Clients ON Tickets.fk_id_client = Clients.id_client
+            ORDER BY Tickets.id_ticket";
                     tableNameDB = "Tickets";
                     break;
+
                 case "Кинозалы":
-                    query = "SELECT id_cinema_hall, hall_type AS \"Тип зала\", row_number AS \"Кол-во рядов\", " +
-                            "seat_number_in_row AS \"Кол-во мест в ряду\", available AS \"Доступен\"" +
-                            "FROM [Cinema Halls] INNER JOIN Hall_types ON id_hall_type == fk_id_hall_type";
-                    tableNameDB = "Cinema Halls";
+                    query = @"SELECT 
+                Cinema_Halls.id_cinema_hall as 'Номер зала',
+                Hall_types.hall_type as 'Тип зала',
+                Cinema_Halls.row_number as 'Кол-во рядов',
+                Cinema_Halls.seat_number_in_row as 'Кол-во мест в ряду',
+                CASE WHEN Cinema_Halls.available = 1 THEN 'Доступен' ELSE 'Не доступен' END as 'Доступен'
+            FROM Cinema_Halls
+            INNER JOIN Hall_types ON Cinema_Halls.fk_id_hall_type = Hall_types.id_hall_type
+            ORDER BY Cinema_Halls.id_cinema_hall";
+                    tableNameDB = "Cinema_Halls";
                     break;
+
                 case "Клиенты":
-                    query = "SELECT id_client, client_full_name AS \"ФИО\", client_date_of_birth AS \"Дата рождения\"," +
-                            "phone AS \"Телефон\", email AS \"эл.почта\" FROM Clients";
+                    query = @"SELECT 
+                Clients.id_client as 'ID',
+                Clients.client_full_name as 'ФИО',
+                Clients.client_date_of_birth as 'Дата рождения',
+                Clients.phone as 'Телефон',
+                Clients.email as 'эл.почта'
+            FROM Clients
+            ORDER BY Clients.id_client";
                     tableNameDB = "Clients";
                     break;
+
+                case "Фильмы":
+                    query = @"SELECT 
+                Movies.id_movie as 'ID',
+                Movies.name as 'Название фильма',
+                Age_ratings.age_rating as 'Возрастной рейтинг',
+                Movies.duration as 'Длительность (мин)',
+                Movies.release_year as 'Год выхода',
+                Movies.rating as 'Рейтинг'
+            FROM Movies
+            LEFT JOIN Age_ratings ON Movies.fk_id_age_rating = Age_ratings.id_age_rating
+            ORDER BY Movies.name";
+                    tableNameDB = "Movies";
+                    break;
+
+                case "Сеансы":
+                    query = @"SELECT 
+                Sessions.id_session as 'Номер сеанса',
+                Movies.name as 'Название фильма',
+                Cinema_Halls.id_cinema_hall as 'Номер зала',
+                Sessions.date_session as 'Дата сеанса',
+                Sessions.start_time as 'Время начала',
+                Sessions.price as 'Цена билета',
+                Sessions.report as 'Отчет'
+            FROM Sessions
+            LEFT JOIN Movies ON Sessions.fk_id_movie = Movies.id_movie
+            LEFT JOIN Cinema_Halls ON Sessions.fk_id_cinema_hall = Cinema_Halls.id_cinema_hall
+            ORDER BY Sessions.date_session, Sessions.start_time";
+                    tableNameDB = "Sessions";
+                    break;
+
+                case "Места":
+                    query = @"SELECT 
+                Seats.id_seat as 'ID',
+                Cinema_Halls.id_cinema_hall as 'Номер зала',
+                Seats.row as 'Ряд',
+                Seats.seat_in_row as 'Место'
+            FROM Seats
+            LEFT JOIN Cinema_Halls ON Seats.fk_id_cinema_hall = Cinema_Halls.id_cinema_hall
+            ORDER BY Cinema_Halls.id_cinema_hall, Seats.row, Seats.seat_in_row";
+                    tableNameDB = "Seats";
+                    break;
+
+                case "Возрастные рейтинги":
+                    query = @"SELECT 
+                Age_ratings.id_age_rating as 'ID',
+                Age_ratings.age_rating as 'Возрастной рейтинг',
+                Age_ratings.min_age as 'Мин. возраст'
+            FROM Age_ratings
+            ORDER BY Age_ratings.id_age_rating";
+                    tableNameDB = "Age_ratings";
+                    break;
+
+                case "Типы залов":
+                    query = @"SELECT 
+                Hall_types.id_hall_type as 'ID',
+                Hall_types.hall_type as 'Тип зала'
+            FROM Hall_types
+            ORDER BY Hall_types.id_hall_type";
+                    tableNameDB = "Hall_types";
+                    break;
+
+                case "Жанры":
+                    query = @"SELECT 
+                Genres.id_genre as 'ID',
+                Genres.genre as 'Название жанра'
+            FROM Genres
+            ORDER BY Genres.genre";
+                    tableNameDB = "Genres";
+                    break;
+
+                case "Фильмы-Жанры":
+                    query = @"SELECT 
+                Movie_Genre.id_movie as 'ID фильма',
+                Movies.name as 'Фильм',
+                Movie_Genre.id_genre as 'ID жанра',
+                Genres.genre as 'Жанр'
+            FROM Movie_Genre
+            LEFT JOIN Movies ON Movie_Genre.id_movie = Movies.id_movie
+            LEFT JOIN Genres ON Movie_Genre.id_genre = Genres.id_genre
+            ORDER BY Movies.name, Genres.genre";
+                    tableNameDB = "Movie_Genre";
+                    break;
+
                 default:
                     this.Close();
                     return;
             }
 
-            // автозаполнение таблицы
-            var adapter = new SQLiteDataAdapter(query, sqliteConn);
-            adapter.Fill(dt);
-            dataGridView1.DataSource = dt;
-
-            // скрытие столбцов с id
-            switch (tableName)
-            {
-                case "Билеты":
-                    dataGridView1.Columns["id_ticket"].Visible = false;
-                    break;
-                case "Кинозалы":
-                    dataGridView1.Columns["id_cinema_hall"].Visible = false;
-                    break;
-                case "Клиенты":
-                    dataGridView1.Columns["id_client"].Visible = false;
-                    break;
-                default:
-                    this.Close();
-                    return;
-            }
+            LoadData();
         }
 
-        //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentCell != null && dataGridView2.DataSource != null)
-        //    {
-        //        dataGridView2.DataSource = dataset1.Doctor_appointment;
-        //        (dataGridView2.DataSource as DataTable).DefaultView.RowFilter = String.Format("fk_id_doctor = {0}", dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[0].Value);
-        //    }
-        //}
-
-
-        //private void AddDoctor_Click(object sender, EventArgs e)
-        //{
-        //    Edit_doctor Add_D = new Edit_doctor(dataset1, true);
-        //    Add_D.ShowDialog();
-        //    SaveToXML();
-        //    dataGridView1.DataSource = null;
-        //    dataGridView1.DataSource = dataset1.Doctor;
-        //    SelectRowId(dataGridView1, Add_D.NewId);
-        //}
-
-        //private void EditDoctor_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentRow != null)
-        //    {
-        //        UInt32 editId = Convert.ToUInt32(dataGridView1.CurrentRow.Cells[0].Value);
-        //        Edit_doctor Add_D = new Edit_doctor(dataset1, false, editId);
-        //        Add_D.ShowDialog();
-        //        SaveToXML();
-        //    }
-        //}
-
-
-        //private void AddAppointment_Click(object sender, EventArgs e)
-        //{
-        //    Edit_appointment Add_a = new Edit_appointment(dataset1, true);
-        //    Add_a.ShowDialog();
-        //    SaveToXML();
-        //    dataGridView2.DataSource = null;
-        //    dataGridView2.DataSource = dataset1.Doctor_appointment;
-        //    SelectRowId(dataGridView2, Add_a.NewId);
-        //}
-
-
-
-        //private void EditAppointment_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView2.CurrentRow != null)
-        //    {
-        //        UInt32 editId = Convert.ToUInt32(dataGridView2.CurrentRow.Cells[0].Value);
-        //        Edit_appointment Add_a = new Edit_appointment(dataset1, false, editId);
-        //        Add_a.ShowDialog();
-        //        SaveToXML();
-        //    }
-        //}
-
-        //private void DeleteAppointment_Click(object sender, EventArgs e)
-        //{
-
-        //    if (dataGridView2.CurrentRow != null)
-        //    {
-        //        // Подтверждение удаления
-        //        DialogResult result = MessageBox.Show(
-        //            "Вы действительно хотите удалить выбранный приём?",
-        //            "Подтверждение удаления",
-        //            MessageBoxButtons.YesNo,
-        //            MessageBoxIcon.Question,
-        //            MessageBoxDefaultButton.Button2);
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            UInt32 rowId = Convert.ToUInt32(dataGridView2.CurrentRow.Cells[0].Value);
-        //            dataGridView2.Rows.Remove(dataGridView2.CurrentRow);
-        //            SaveToXML();
-        //            SelectRow(dataGridView2, 0);
-        //        }
-        //    }
-        //}
-
-        /*private void SelectRow(DataGridView dataGrid, int bIndex)
+        private void LoadData()
         {
-            if (bIndex >= 0 && bIndex < dataGrid.Rows.Count)
+            try
             {
-                dataGrid.CurrentCell = dataGrid.Rows[bIndex].Cells[2];
-                dataGrid.Rows[bIndex].Selected = true;
-                dataGrid.FirstDisplayedScrollingRowIndex = bIndex;
-            }
-        }
+                dt.Clear();
+                dtOriginal.Clear();
 
-        private void SelectRowId(DataGridView dataGrid, UInt32 id)
-        {
-            foreach (DataGridViewRow row in dataGrid.Rows)
-            {
-                if (row.Cells[0].Value != null && Convert.ToInt32(row.Cells[0].Value) == id)
+                adapter = new SQLiteDataAdapter(query, sqliteConn);
+                adapter.Fill(dt);
+                adapter.Fill(dtOriginal);
+
+                dataGridView1.DataSource = dt;
+
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
                 {
-                    dataGrid.CurrentCell = row.Cells[2];
-                    row.Selected = true;
-                    dataGrid.FirstDisplayedScrollingRowIndex = row.Index;
-                    return;
+                    if (column.Name == "ID" ||
+                        column.Name == "ID фильма" ||
+                        column.Name == "ID жанра" ||
+                        column.Name == "Зал")
+                    {
+                        column.Visible = false;
+                    }
+                }
+
+                InitializeSearch();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+        private void InitializeSearch()
+        {
+            search_field_combobox.Items.Clear();
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                if (column.Visible)
+                {
+                    search_field_combobox.Items.Add(column.HeaderText);
                 }
             }
-        }*/
 
-        private void Delete_Click(object sender, EventArgs e)
+            if (search_field_combobox.Items.Count > 0)
+                search_field_combobox.SelectedIndex = 0;
+        }
+
+        private void ApplySearchFilter()
         {
-            if (dataGridView1.CurrentRow != null)
+            if (dtOriginal.Rows.Count == 0) return;
+
+            string searchText = search_textbox.Text.Trim();
+            string selectedField = search_field_combobox.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(searchText) || string.IsNullOrEmpty(selectedField))
+            {
+                ShowAllData();
+                MessageBox.Show("Введите текст для поиска", "Поиск",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            dt.Rows.Clear();
+            foreach (DataRow row in dtOriginal.Rows)
+            {
+                string cellValue = row[selectedField]?.ToString() ?? "";
+                if (cellValue.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    dt.ImportRow(row);
+                }
+            }
+
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Ничего не найдено", "Поиск",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ShowAllData()
+        {
+            dt.Rows.Clear();
+            foreach (DataRow row in dtOriginal.Rows)
+            {
+                dt.ImportRow(row);
+            }
+        }
+
+        private void InsTable_Click(object sender, EventArgs e)
+        {
+            InsEdit editForm = new InsEdit(sqliteConn, tableNameDB, null, true);
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                LoadData();
+            }
+        }
+
+        private void EditTable_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Выберите запись для редактирования");
+                return;
+            }
+            string idColName = "ID";
+            if (tableNameDB == "Cinema_Halls")
+                idColName = "Номер зала";
+            else if (tableNameDB == "Sessions")
+                idColName = "Номер сеанса";
+
+            InsEdit editForm;
+            if (tableNameDB == "Movie_Genre")
+            {
+                int[] id = { 0, 0 };
+                id[0] = Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID фильма"].Value); // PK состоит из двух столбцов
+                id[1] = Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID жанра"].Value);
+                editForm = new InsEdit(sqliteConn, tableNameDB, id, false);
+
+            }
+            else
+            {
+                int[] id = { 0 };
+                id[0] = Convert.ToInt32(dataGridView1.CurrentRow.Cells[idColName].Value);
+                editForm = new InsEdit(sqliteConn, tableNameDB, id, false);
+            }
+
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                LoadData(); 
+            }
+        }
+
+        private void DelTable_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.RowCount == 0)
+            {
+                MessageBox.Show("Нет данных для удаления"); return;
+            }
+            if (dataGridView1.RowCount != 0 && dataGridView1.CurrentRow.Index != 0)
+            {
+                CurrentIndex = dataGridView1.CurrentRow.Index - 1;
+            }
+            try
             {
                 DialogResult result = MessageBox.Show(
-                    "Вы действительно хотите удалить выбранную запись?",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2);
+                                   "Вы действительно хотите удалить запись?",
+                                   "Подтверждение удаления",
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.Yes)
                 {
-                    UInt32 rowId = Convert.ToUInt32(dataGridView1.CurrentRow.Cells[0].Value);
-                    //DataRow[] rows = parentForm.sqliteConn.CreateCommand("SELECT что-то там");
-                    /*if (rows.Length == 0)
+                    int id = Convert.ToInt32(dt.Rows[dataGridView1.CurrentRow.Index][0]);
+
+                    if (tableNameDB == "Movie_Genre")
                     {
-                        dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-                        SaveToXML();
-                        SelectRow(dataGridView1, 0);
+                        int movieId = Convert.ToInt32(dt.Rows[dataGridView1.CurrentRow.Index][0]);
+                        int genreId = Convert.ToInt32(dt.Rows[dataGridView1.CurrentRow.Index][2]);
+                        command = new SQLiteCommand(
+                            $"DELETE FROM [Movie_Genre] WHERE [id_movie] = {movieId} AND [id_genre] = {genreId}",
+                            sqliteConn);
                     }
                     else
                     {
-                        MessageBox.Show("Нельзя удалить доктора с приёмами", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                        string idColumnName = GetIdColumnName(tableNameDB);
+                        command = new SQLiteCommand($"DELETE FROM [{tableNameDB}] WHERE [{idColumnName}] = {id}", sqliteConn);
 
-                    }*/
+                    }
+                    command.ExecuteNonQuery();
+
+                    LoadData();
                 }
             }
+            catch (SQLiteException ex) when (ex.ErrorCode == (int)SQLiteErrorCode.Constraint)
+            {
+                MessageBox.Show("Невозможно удалить запись: существуют связанные данные в других таблицах",
+    "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+            if (dataGridView1.RowCount != 0)
+            {
+                dataGridView1.CurrentCell =
+                    dataGridView1.Rows[CurrentIndex].Cells[dataGridView1.ColumnCount - 1];
+            }
+
+        }
+
+        private string GetIdColumnName(string tableName)
+        {
+            switch (tableName)
+            {
+                case "Tickets": return "id_ticket";
+                case "Cinema_Halls": return "id_cinema_hall";
+                case "Clients": return "id_client";
+                case "Movies": return "id_movie";
+                case "Sessions": return "id_session";
+                case "Seats": return "id_seat";
+                case "Age_ratings": return "id_age_rating";
+                case "Hall_types": return "id_hall_type";
+                case "Genres": return "id_genre";
+                case "Movie_Genre": return "id_movie";
+                default: return "id";
+            }
+        }
+
+        private void CloseTable_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            search_textbox.Text = "";
+            LoadData();
+            MessageBox.Show("Данные обновлены", "Обновление",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void search_btn_Click_1(object sender, EventArgs e)
+        {
+            ApplySearchFilter();
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

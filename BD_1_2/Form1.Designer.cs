@@ -34,10 +34,17 @@
             this.CloseConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.TablesToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenTableTickets = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenTableHalls = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenTableClients = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenTicketsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenCinemaHallsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenClientsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenSessionsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenSeatsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenMoviesTable = new System.Windows.Forms.ToolStripMenuItem();
             this.дополнительныеТаблицыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenAgeRatingsTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenGenresTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenHallTypesTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenMovieGenreTable = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportsToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportWord = new System.Windows.Forms.ToolStripMenuItem();
             this.ReportExcel = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,6 +98,7 @@
             this.CloseConnection.Name = "CloseConnection";
             this.CloseConnection.Size = new System.Drawing.Size(188, 22);
             this.CloseConnection.Text = "Закрыть соединение";
+            this.CloseConnection.Click += new System.EventHandler(this.CloseConnection_Click_1);
             // 
             // Exit
             // 
@@ -102,39 +110,89 @@
             // TablesToolStripMenu
             // 
             this.TablesToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpenTableTickets,
-            this.OpenTableHalls,
-            this.OpenTableClients});
+            this.OpenTicketsTable,
+            this.OpenCinemaHallsTable,
+            this.OpenClientsTable,
+            this.OpenSessionsTable,
+            this.OpenSeatsTable,
+            this.OpenMoviesTable});
             this.TablesToolStripMenu.Name = "TablesToolStripMenu";
             this.TablesToolStripMenu.Size = new System.Drawing.Size(68, 20);
             this.TablesToolStripMenu.Text = "Таблицы";
             // 
-            // OpenTableTickets
+            // OpenTicketsTable
             // 
-            this.OpenTableTickets.Name = "OpenTableTickets";
-            this.OpenTableTickets.Size = new System.Drawing.Size(180, 22);
-            this.OpenTableTickets.Text = "Билеты";
-            this.OpenTableTickets.Click += new System.EventHandler(this.OpenTable_Click);
+            this.OpenTicketsTable.Name = "OpenTicketsTable";
+            this.OpenTicketsTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenTicketsTable.Text = "Билеты";
+            this.OpenTicketsTable.Click += new System.EventHandler(this.OpenTable_Click);
             // 
-            // OpenTableHalls
+            // OpenCinemaHallsTable
             // 
-            this.OpenTableHalls.Name = "OpenTableHalls";
-            this.OpenTableHalls.Size = new System.Drawing.Size(180, 22);
-            this.OpenTableHalls.Text = "Кинозалы";
-            this.OpenTableHalls.Click += new System.EventHandler(this.OpenTable_Click);
+            this.OpenCinemaHallsTable.Name = "OpenCinemaHallsTable";
+            this.OpenCinemaHallsTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenCinemaHallsTable.Text = "Кинозалы";
+            this.OpenCinemaHallsTable.Click += new System.EventHandler(this.OpenTable_Click);
             // 
-            // OpenTableClients
+            // OpenClientsTable
             // 
-            this.OpenTableClients.Name = "OpenTableClients";
-            this.OpenTableClients.Size = new System.Drawing.Size(180, 22);
-            this.OpenTableClients.Text = "Клиенты";
-            this.OpenTableClients.Click += new System.EventHandler(this.OpenTable_Click);
+            this.OpenClientsTable.Name = "OpenClientsTable";
+            this.OpenClientsTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenClientsTable.Text = "Клиенты";
+            this.OpenClientsTable.Click += new System.EventHandler(this.OpenTable_Click);
+            // 
+            // OpenSessionsTable
+            // 
+            this.OpenSessionsTable.Name = "OpenSessionsTable";
+            this.OpenSessionsTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenSessionsTable.Text = "Сеансы";
+            // 
+            // OpenSeatsTable
+            // 
+            this.OpenSeatsTable.Name = "OpenSeatsTable";
+            this.OpenSeatsTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenSeatsTable.Text = "Места";
+            // 
+            // OpenMoviesTable
+            // 
+            this.OpenMoviesTable.Name = "OpenMoviesTable";
+            this.OpenMoviesTable.Size = new System.Drawing.Size(180, 22);
+            this.OpenMoviesTable.Text = "Фильмы";
             // 
             // дополнительныеТаблицыToolStripMenuItem
             // 
+            this.дополнительныеТаблицыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenAgeRatingsTable,
+            this.OpenGenresTable,
+            this.OpenHallTypesTable,
+            this.OpenMovieGenreTable});
             this.дополнительныеТаблицыToolStripMenuItem.Name = "дополнительныеТаблицыToolStripMenuItem";
             this.дополнительныеТаблицыToolStripMenuItem.Size = new System.Drawing.Size(166, 20);
             this.дополнительныеТаблицыToolStripMenuItem.Text = "Дополнительные таблицы";
+            // 
+            // OpenAgeRatingsTable
+            // 
+            this.OpenAgeRatingsTable.Name = "OpenAgeRatingsTable";
+            this.OpenAgeRatingsTable.Size = new System.Drawing.Size(193, 22);
+            this.OpenAgeRatingsTable.Text = "Возрастные рейтинги";
+            // 
+            // OpenGenresTable
+            // 
+            this.OpenGenresTable.Name = "OpenGenresTable";
+            this.OpenGenresTable.Size = new System.Drawing.Size(193, 22);
+            this.OpenGenresTable.Text = "Жанры";
+            // 
+            // OpenHallTypesTable
+            // 
+            this.OpenHallTypesTable.Name = "OpenHallTypesTable";
+            this.OpenHallTypesTable.Size = new System.Drawing.Size(193, 22);
+            this.OpenHallTypesTable.Text = "Типы залов";
+            // 
+            // OpenMovieGenreTable
+            // 
+            this.OpenMovieGenreTable.Name = "OpenMovieGenreTable";
+            this.OpenMovieGenreTable.Size = new System.Drawing.Size(193, 22);
+            this.OpenMovieGenreTable.Text = "Фильмы-Жанры";
             // 
             // ReportsToolStripMenu
             // 
@@ -151,18 +209,21 @@
             this.ReportWord.Name = "ReportWord";
             this.ReportWord.Size = new System.Drawing.Size(223, 22);
             this.ReportWord.Text = "Сформировать отчет Word";
+            this.ReportWord.Click += new System.EventHandler(this.ReportWord_Click);
             // 
             // ReportExcel
             // 
             this.ReportExcel.Name = "ReportExcel";
             this.ReportExcel.Size = new System.Drawing.Size(223, 22);
             this.ReportExcel.Text = "Сформировать отчет Excel";
+            this.ReportExcel.Click += new System.EventHandler(this.ReportExcel_Click);
             // 
             // ReportPDF
             // 
             this.ReportPDF.Name = "ReportPDF";
             this.ReportPDF.Size = new System.Drawing.Size(223, 22);
             this.ReportPDF.Text = "Сформировать отчет PDF";
+            this.ReportPDF.Click += new System.EventHandler(this.ReportPDF_Click);
             // 
             // WindowToolStripMenu
             // 
@@ -227,7 +288,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(450, 200);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "База данных \"Кинотеатр\"";
@@ -260,8 +321,15 @@
         private System.Windows.Forms.ToolStripMenuItem WinsVertical;
         private System.Windows.Forms.ToolStripMenuItem WinsCloseAll;
         private System.Windows.Forms.ToolStripMenuItem дополнительныеТаблицыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem OpenTableHalls;
-        private System.Windows.Forms.ToolStripMenuItem OpenTableClients;
-        private System.Windows.Forms.ToolStripMenuItem OpenTableTickets;
+        private System.Windows.Forms.ToolStripMenuItem OpenCinemaHallsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenClientsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenTicketsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenSessionsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenSeatsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenMoviesTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenAgeRatingsTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenGenresTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenHallTypesTable;
+        private System.Windows.Forms.ToolStripMenuItem OpenMovieGenreTable;
     }
 }

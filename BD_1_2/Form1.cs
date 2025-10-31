@@ -1,90 +1,99 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Runtime.CompilerServices;
-
+using System.Windows.Forms;
+using BD_1_2;
 
 namespace MyDatabase
 {
     public partial class Form1 : Form
     {
-        const string relativePath = "Cinema.db"; // Отн. путь до БД
+        const string relativePath = "Cinema.db";
         string fullPath = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
         public SQLiteConnection sqliteConn;
         private string connString;
+        private bool isConnected = false;
 
         public Form1()
         {
             InitializeComponent();
             connString = $"Data Source={fullPath};Version=3;";
             sqliteConn = new SQLiteConnection(connString);
+            UpdateConnectionStatus();
+            OpenMoviesTable.Click += OpenTable_Click;
+            OpenSessionsTable.Click += OpenTable_Click;
+            OpenTicketsTable.Click += OpenTable_Click;
+            OpenClientsTable.Click += OpenTable_Click;
+            OpenCinemaHallsTable.Click += OpenTable_Click;
+            OpenSeatsTable.Click += OpenTable_Click;
+            OpenAgeRatingsTable.Click += OpenTable_Click;
+            OpenHallTypesTable.Click += OpenTable_Click;
+            OpenGenresTable.Click += OpenTable_Click;
+            OpenMovieGenreTable.Click += OpenTable_Click;
         }
-
-        // метод для установки статуса внизу формы
-        private void WriteStatus(string status)
+        public string StatusText
+        {
+            get => statusBarField1.Text;
+            set => statusBarField1.Text = value;
+        }
+        public void WriteStatus(string status)
         {
             statusBarField1.Text = status;
         }
 
+        public SQLiteConnection GetConnection()
+        {
+            return sqliteConn;
+        }
 
-        // подключаться только при запросе/изменении БД, не держать соед. открытым
+        private void UpdateConnectionStatus()
+        {
+            OpenMoviesTable.Enabled = isConnected;
+            OpenSessionsTable.Enabled = isConnected;
+            OpenTicketsTable.Enabled = isConnected;
+            OpenClientsTable.Enabled = isConnected;
+            OpenCinemaHallsTable.Enabled = isConnected;
+            OpenSeatsTable.Enabled = isConnected;
+            OpenAgeRatingsTable.Enabled = isConnected;
+            OpenHallTypesTable.Enabled = isConnected;
+            OpenGenresTable.Enabled = isConnected;
+            OpenMovieGenreTable.Enabled = isConnected;
+            ReportWord.Enabled = isConnected;
+            ReportExcel.Enabled = isConnected;
+            ReportPDF.Enabled = isConnected;
+            ConnectToDB.Enabled = !isConnected;
+            CloseConnection.Enabled = isConnected;
+        }
+
         private void ConnectToDB_Click(object sender, EventArgs e)
         {
             try
             {
-                sqliteConn.Open();
+                if (sqliteConn.State != ConnectionState.Open)
+                {
+                    sqliteConn.Open();
+                }
+                isConnected = true;
                 WriteStatus("Подключение к БД выполнено успешно");
+                UpdateConnectionStatus();
             }
             catch (Exception ex)
             {
+                isConnected = false;
                 WriteStatus("Не удалось выполнить подключение к БД");
-                File.AppendAllText("!t.txt", "\nERROR: " + ex + "\n");
-            }
-            finally { 
-                sqliteConn.Close(); 
+                MessageBox.Show($"Ошибка подключения к БД: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        /*public void DBSendQuery(string query) {
-            try
-            {
-                sqliteConn.Open();
-                SQLiteCommand sqlComm = sqliteConn.CreateCommand();
-                sqlComm.CommandText = "SELECT * FROM Tickets";
-                SQLiteDataReader reader = sqlComm.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        var d1 = reader.GetInt32(0);
-                        var d2 = reader.GetInt32(1);
-                        var d3 = reader.GetInt32(2);
-                        var d4 = reader.GetInt32(3);
-                        var d5 = reader.GetInt32(4);
-                        var d6 = reader.GetString(5);
-                        File.AppendAllText("!t.txt", d1+" "+d2+" "+d3+" "+d4+" "+d5+" "+d6 + "\n");
-                    }
-                }
-            }
-            catch (SQLiteException ex)
-            {
-                File.AppendAllText("!t.txt", "\nERROR: " + ex +"\n");
-            }
-            finally
-            {
-                sqliteConn.Close();
-            }
-        }*/
-
         private void OpenTable_Click(object sender, EventArgs e)
         {
+
             string table = (sender as ToolStripMenuItem).Text;
 
-            // проверка что это окно таблицы уже не открыто
             bool alreadyOpened = false;
-            foreach(TableForm form in this.MdiChildren)
+            foreach (TableForm form in this.MdiChildren)
             {
                 if (form.Name == table)
                 {
@@ -93,9 +102,9 @@ namespace MyDatabase
                 }
             }
 
-            if (!alreadyOpened) 
-            {            
-                TableForm tableForm = new TableForm(connString, table);
+            if (!alreadyOpened)
+            {
+                TableForm tableForm = new TableForm(sqliteConn, table);
                 tableForm.MdiParent = this;
                 tableForm.Show();
                 WriteStatus("Открыта таблица " + table);
@@ -104,13 +113,12 @@ namespace MyDatabase
 
         private void WinsCloseAll_Click(object sender, EventArgs e)
         {
-            foreach(Form form in MdiChildren)
+            foreach (Form form in MdiChildren)
             {
-                WriteStatus("Все окна закрыты");
                 form.Close();
             }
+            WriteStatus("Все окна закрыты");
         }
-
 
         private void WinsCascade_Click(object sender, EventArgs e)
         {
@@ -119,6 +127,10 @@ namespace MyDatabase
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            if (sqliteConn.State == ConnectionState.Open)
+            {
+                sqliteConn.Close();
+            }
             this.Close();
         }
 
@@ -130,6 +142,57 @@ namespace MyDatabase
         private void WinsVertical_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        private void ReportWord_Click(object sender, EventArgs e)
+        {
+
+            Report rep = new Report(1, sqliteConn, this);
+            rep.Text = "Сеансы";
+            rep.Show();
+        }
+
+        private void ReportExcel_Click(object sender, EventArgs e)
+        {
+
+            Report rep = new Report(2, sqliteConn, this);
+            rep.Text = "Фильмы";
+            rep.Show();
+        }
+
+        private void ReportPDF_Click(object sender, EventArgs e)
+        {
+            Report rep = new Report(3, sqliteConn, this);
+            rep.Text = "Жанры";
+            rep.Show();
+
+
+        }
+
+        private void CloseConnection_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (Form form in MdiChildren)
+                {
+                    form.Close();
+                }
+
+                if (sqliteConn.State == ConnectionState.Open)
+                {
+                    sqliteConn.Close();
+                }
+
+                isConnected = false;
+                WriteStatus("Отключение от БД выполнено успешно");
+                UpdateConnectionStatus();
+            }
+            catch (Exception ex)
+            {
+                WriteStatus("Ошибка при отключении от БД");
+                MessageBox.Show($"Ошибка отключения: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
