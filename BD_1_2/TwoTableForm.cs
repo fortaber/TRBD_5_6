@@ -200,7 +200,7 @@ namespace MyDatabase
                 search_field_combobox2.SelectedIndex = 0;
         }
 
-        private void ApplySearchFilter(object sender, EventArgs e) // зависит от sender
+        private void ApplySearchFilter(object sender, EventArgs e)
         {
             string btnName = (sender as ToolStripButton).Name;
             DataTable dt = (btnName == "search_btn1" ? dt1 : dt2);
@@ -246,7 +246,7 @@ namespace MyDatabase
                 dt2.ImportRow(row);
         }
 
-        private void InsTable_Click(object sender, EventArgs e) // зависит от sender
+        private void InsTable_Click(object sender, EventArgs e) 
         {
             string btnName = (sender as ToolStripButton).Name;
             InsEdit editForm = new InsEdit(sqliteConn, btnName == "InsTable1"? table1NameDB : table2NameDB, null, true);
@@ -256,7 +256,7 @@ namespace MyDatabase
             }
         }
 
-        private void EditTable_Click(object sender, EventArgs e) // зависит от sender
+        private void EditTable_Click(object sender, EventArgs e) 
         {
             string btnName = (sender as ToolStripButton).Name;
             string TableName = btnName == "EditTable1" ? table1NameDB : table2NameDB;
@@ -283,7 +283,7 @@ namespace MyDatabase
             }
         }
 
-        private void DelTable_Click(object sender, EventArgs e) // зависит от sender
+        private void DelTable_Click(object sender, EventArgs e) 
         {
             string btnName = (sender as ToolStripButton).Name;
             string tableName = btnName == "DelTable1" ? table1NameDB : table2NameDB;

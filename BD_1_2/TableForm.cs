@@ -295,7 +295,7 @@ namespace MyDatabase
             if (tableNameDB == "Movie_Genre")
             {
                 int[] id = { 0, 0 };
-                id[0] = Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID фильма"].Value); // PK состоит из двух столбцов
+                id[0] = Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID фильма"].Value);
                 id[1] = Convert.ToInt32(dataGridView1.CurrentRow.Cells["ID жанра"].Value);
                 editForm = new InsEdit(sqliteConn, tableNameDB, id, false);
 

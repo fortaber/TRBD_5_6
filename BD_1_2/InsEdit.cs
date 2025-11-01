@@ -54,27 +54,25 @@ namespace BD_1_2
                 string columnName = column["name"].ToString();
                 string columnType = column["type"].ToString().ToLower();
 
-                // Пропускаем только первичные ключи с автоинкрементом
                 if (Convert.ToInt32(column["pk"]) == 1 && tableName != "Movie_Genre")
                     continue;
 
-                // Создаем label
                 Label label = new Label();
                 label.Text = GetDisplayName(columnName);
                 label.Location = new Point(20, yPos);
                 label.Size = new Size(150, 20);
                 this.Controls.Add(label);
 
-                // Создаем элемент ввода
                 Control inputControl = CreateInputControl(columnName, columnType);
                 inputControl.Location = new Point(180, yPos);
                 inputControl.Size = new Size(200, 20);
-                inputControl.Name = columnName; // Важно: используем настоящее имя колонки
+                inputControl.Name = columnName;
                 this.Controls.Add(inputControl);
 
                 yPos += 30;
             }
         }
+
         private string GetDisplayName(string columnName)
         {
             var displayNames = new Dictionary<string, string>
@@ -148,7 +146,7 @@ namespace BD_1_2
                         if (columnName == "buy_date" || columnName == "client_date_of_birth")
                             dtp.MaxDate = DateTime.Now.AddDays(1);
                         else
-                            dtp.MaxDate = new DateTime(2100, 1, 1); // для date_session
+                            dtp.MaxDate = new DateTime(2100, 1, 1);
                         return dtp;
                     }
                     if (columnName.Contains("time"))
@@ -162,7 +160,8 @@ namespace BD_1_2
                     if (columnName.Contains("email"))
                     {
                         TextBox tb = new TextBox();
-                        tb.Validating += TextBox_TextChanged;
+                        tb.Validating += Email_Validating;
+                        tb.MaxLength = 100;
                         return tb;
                     }
                     if (columnName.Contains("phone"))
@@ -172,17 +171,79 @@ namespace BD_1_2
                         return mtb;
                     }
                     else
-                        return new TextBox();
+                    {
+                        TextBox tb = new TextBox();
+                        switch (columnName)
+                        {
+                            case "hall_type": tb.MaxLength = 30; break;
+                            case "age_rating": tb.MaxLength = 10; break;
+                            case "genre": tb.MaxLength = 50; break;
+                            case "name": tb.MaxLength = 100; break;
+                            case "client_full_name": tb.MaxLength = 100; break;
+                            case "report": tb.MaxLength = 200; break;
+                            default: tb.MaxLength = 255; break;
+                        }
+                        return tb;
+                    }
 
                 case "integer":
                     NumericUpDown n = new NumericUpDown();
-                    n.Maximum = 1E9m;
+                    switch (columnName)
+                    {
+                        case "min_age":
+                            n.Minimum = 0;
+                            n.Maximum = 21;
+                            break;
+                        case "row_number":
+                            n.Minimum = 1;
+                            n.Maximum = 100;
+                            break;
+                        case "seat_number_in_row":
+                            n.Minimum = 1;
+                            n.Maximum = 100;
+                            break;
+                        case "duration":
+                            n.Minimum = 1;
+                            n.Maximum = 480;
+                            break;
+                        case "release_year":
+                            n.Minimum = 1890;
+                            n.Maximum = DateTime.Now.Year;
+                            break;
+                        case "row":
+                            n.Minimum = 1;
+                            n.Maximum = 1000;
+                            break;
+                        case "seat_in_row":
+                            n.Minimum = 1;
+                            n.Maximum = 1000;
+                            break;
+                        default:
+                            n.Minimum = 0;
+                            n.Maximum = 1000000;
+                            break;
+                    }
                     return n;
 
                 case "real":
                     NumericUpDown nr = new NumericUpDown();
-                    nr.Maximum = 1E9m;
                     nr.DecimalPlaces = 2;
+                    switch (columnName)
+                    {
+                        case "rating":
+                            nr.Minimum = 1;
+                            nr.Maximum = 10;
+                            nr.DecimalPlaces = 1;
+                            break;
+                        case "price":
+                            nr.Minimum = 0;
+                            nr.Maximum = 10000;
+                            break;
+                        default:
+                            nr.Minimum = 0;
+                            nr.Maximum = 1000000;
+                            break;
+                    }
                     return nr;
 
                 case "blob":
@@ -191,21 +252,26 @@ namespace BD_1_2
                     return checkBox;
 
                 default:
-                    return new TextBox();
+                    TextBox defaultTb = new TextBox();
+                    defaultTb.MaxLength = 255;
+                    return defaultTb;
             }
         }
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void Email_Validating(object sender, EventArgs e)
         {
-            TextBox currentTextBox = sender as TextBox;
-            if (currentTextBox == null) return;
+            TextBox textBox = sender as TextBox;
+            if (textBox == null) return;
 
-            string currentText = currentTextBox.Text;
+            string email = textBox.Text.Trim();
 
-            // Проверяем что это почта
-            if (!IsValidEmail(currentText))
+            if (!string.IsNullOrEmpty(email) && !IsValidEmail(email))
             {
-                currentTextBox.Text = "";
+                textBox.BackColor = Color.LightPink;
+            }
+            else
+            {
+                textBox.BackColor = Color.White;
             }
         }
 
@@ -220,6 +286,32 @@ namespace BD_1_2
             {
                 return false;
             }
+        }
+
+        private bool IsPhoneComplete(string phone)
+        {
+            if (string.IsNullOrEmpty(phone))
+                return false;
+
+            string cleanPhone = phone.Replace("+7-", "").Replace("-", "");
+            int digitCount = 0;
+
+            foreach (char c in cleanPhone)
+            {
+                if (char.IsDigit(c))
+                    digitCount++;
+            }
+
+            return digitCount == 10;
+        }
+
+        private bool IsValidFullName(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+                return true;
+
+            string[] words = fullName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return words.Length >= 2;
         }
 
         private ComboBox CreateStatusComboBox()
@@ -247,7 +339,8 @@ namespace BD_1_2
             {
                 foreach (Control control in this.Controls)
                 {
-                    if (control.Name == "buy_date") {
+                    if (control.Name == "buy_date")
+                    {
                         DateTimePicker dtp = control as DateTimePicker;
                         dtp.Format = DateTimePickerFormat.Custom;
                         dtp.CustomFormat = " ";
@@ -343,7 +436,6 @@ namespace BD_1_2
             return comboBox;
         }
 
-        // Получить имя связанной таблицы
         private string GetReferencedTableName(string fkColumnName)
         {
             var tableMappings = new Dictionary<string, string>
@@ -422,12 +514,9 @@ namespace BD_1_2
                             continue;
 
                         string fieldName = control.Name;
-                        //MessageBox.Show(control.Name, reader[fieldName].ToString());
-
                         try
                         {
                             object value = reader[fieldName];
-
                             if (value != DBNull.Value)
                             {
                                 SetControlValue(control, value);
@@ -464,7 +553,6 @@ namespace BD_1_2
                     if (DateTime.TryParseExact(value.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateValue))
                         dateTimePicker.Value = dateValue;
                 }
-
             }
             else if (control is CheckBox checkBox)
                 checkBox.Checked = Convert.ToBoolean(value);
@@ -490,6 +578,12 @@ namespace BD_1_2
 
         private void Ok_Click(object sender, EventArgs e)
         {
+            if (!ValidateAllFields())
+                return;
+
+            if (tableName == "Sessions" && !ValidateSessionConflict())
+                return;
+
             bool success = false;
             try
             {
@@ -504,7 +598,7 @@ namespace BD_1_2
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка");
+                MessageBox.Show($"Неожиданная ошибка: {ex.Message}", "Ошибка");
             }
 
             if (success)
@@ -512,6 +606,154 @@ namespace BD_1_2
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void HandleUniqueConstraintError(string errorMessage)
+        {
+            string userMessage;
+
+            if (errorMessage.Contains("Seats.fk_id_cinema_hall"))
+            {
+                userMessage = "Место с такими параметрами (зал, ряд, место) уже существует!";
+            }
+            else if (errorMessage.Contains("Sessions.fk_id_cinema_hall"))
+            {
+                userMessage = "Сеанс с такими параметрами (зал, дата, время) уже существует!";
+            }
+            else if (errorMessage.Contains("Clients.phone"))
+            {
+                userMessage = "Клиент с таким телефоном уже существует!";
+            }
+            else if (errorMessage.Contains("Clients.email"))
+            {
+                userMessage = "Клиент с таким email уже существует!";
+            }
+            else if (errorMessage.Contains("Age_ratings.age_rating"))
+            {
+                userMessage = "Возрастной рейтинг с таким названием уже существует!";
+            }
+            else if (errorMessage.Contains("Hall_types.hall_type"))
+            {
+                userMessage = "Тип зала с таким названием уже существует!";
+            }
+            else if (errorMessage.Contains("Genres.genre"))
+            {
+                userMessage = "Жанр с таким названием уже существует!";
+            }
+            else if (errorMessage.Contains("Movie_Genre"))
+            {
+                userMessage = "Связь фильма с жанром уже существует!";
+            }
+            else if (errorMessage.Contains("Tickets.fk_id_session"))
+            {
+                userMessage = "Билет на это место в данном сеансе уже существует!";
+            }
+            else
+            {
+                userMessage = "Запись с такими данными уже существует в базе!";
+            }
+
+            MessageBox.Show(userMessage, "Ошибка уникальности", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private bool ValidateAllFields()
+        {
+            if (!ValidateFullName())
+                return false;
+
+            if (!ValidateEmail())
+                return false;
+
+            if (!ValidateRequiredFields())
+                return false;
+
+            return true;
+        }
+
+        private bool ValidateFullName()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox textBox && control.Name == "client_full_name")
+                {
+                    string fullName = textBox.Text.Trim();
+
+                    if (!IsValidFullName(fullName))
+                    {
+                        MessageBox.Show("ФИО должно содержать минимум 2 слова",
+                            "Некорректное ФИО",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        textBox.Focus();
+                        return false;
+                    }
+                    break;
+                }
+            }
+            return true;
+        }
+
+        private bool ValidateEmail()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox textBox && control.Name == "email")
+                {
+                    string email = textBox.Text.Trim();
+
+                    if (!string.IsNullOrEmpty(email) && !IsValidEmail(email))
+                    {
+                        MessageBox.Show("Введите корректный email адрес или оставьте поле пустым",
+                            "Некорректный email",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        textBox.Focus();
+                        return false;
+                    }
+                    break;
+                }
+            }
+            return true;
+        }
+
+        private bool ValidateRequiredFields()
+        {
+            foreach (DataRow column in schemaTable.Rows)
+            {
+                string columnName = column["name"].ToString();
+                bool isNullable = Convert.ToInt32(column["notnull"]) == 0;
+
+                if (Convert.ToInt32(column["pk"]) == 1 && tableName != "Movie_Genre")
+                    continue;
+
+                if (!isNullable)
+                {
+                    Control inputControl = null;
+                    foreach (Control control in this.Controls)
+                    {
+                        if (control.Name == columnName)
+                        {
+                            inputControl = control;
+                            break;
+                        }
+                    }
+
+                    if (inputControl != null)
+                    {
+                        string value = GetControlValue(inputControl);
+                        if (string.IsNullOrEmpty(value) || value == "NULL" || value == "''")
+                        {
+                            MessageBox.Show($"Поле '{GetDisplayName(columnName)}' обязательно для заполнения",
+                                "Обязательное поле",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            inputControl.Focus();
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         private bool InsertRecord()
@@ -525,7 +767,6 @@ namespace BD_1_2
 
                 foreach (Control control in this.Controls)
                 {
-                    // Обрабатываем все элементы управления кроме меток
                     if (control is Label || control is Button)
                         continue;
 
@@ -566,7 +807,14 @@ namespace BD_1_2
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при добавлении записи: {ex.Message}", "Ошибка");
+                if (ex.Message.Contains("UNIQUE constraint failed") || ex.Message.Contains("constraint failed"))
+                {
+                    HandleUniqueConstraintError(ex.Message);
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка при добавлении записи: {ex.Message}", "Ошибка");
+                }
                 return false;
             }
         }
@@ -622,17 +870,38 @@ namespace BD_1_2
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при обновлении записи: {ex.Message}", "Ошибка");
+                if (ex.Message.Contains("UNIQUE constraint failed") || ex.Message.Contains("constraint failed"))
+                {
+                    HandleUniqueConstraintError(ex.Message);
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка при обновлении записи: {ex.Message}", "Ошибка");
+                }
                 return false;
             }
         }
-
 
         private string GetControlValue(Control control)
         {
             if (control is TextBox textBox)
             {
-                return $"'{textBox.Text.Replace("'", "''")}'";
+                string text = textBox.Text.Trim();
+
+                if (control.Name == "email")
+                {
+                    if (!string.IsNullOrEmpty(text) && !IsValidEmail(text))
+                    {
+                        return "''";
+                    }
+                }
+
+                if (string.IsNullOrEmpty(text))
+                {
+                    return "NULL";
+                }
+
+                return $"'{text.Replace("'", "''")}'";
             }
             else if (control is NumericUpDown numericUpDown)
             {
@@ -664,7 +933,14 @@ namespace BD_1_2
             }
             else if (control is MaskedTextBox maskedTextBox)
             {
-                return $"\"{maskedTextBox.Text}\"";
+                string phone = maskedTextBox.Text.Trim();
+
+                if (string.IsNullOrEmpty(phone) || !IsPhoneComplete(phone))
+                {
+                    return "''";
+                }
+
+                return $"'{phone.Replace("'", "''")}'";
             }
             else
             {
@@ -682,13 +958,21 @@ namespace BD_1_2
             int seat_n;
             foreach (Control control in Controls)
             {
-                
-                if (control.Name == "seat_in_row")
-                    seat = int.Parse(control.Text);
-                if (control.Name == "row")
-                    row = int.Parse(control.Text);
-                if (control.Name == "fk_id_cinema_hall")
-                    hall_id = int.Parse(control.Text);
+                if (control.Name == "seat_in_row" && control is NumericUpDown nud)
+                    seat = (int)nud.Value;
+                if (control.Name == "row" && control is NumericUpDown nud2)
+                    row = (int)nud2.Value;
+                if (control.Name == "fk_id_cinema_hall" && control is ComboBox cb)
+                {
+                    if (cb.SelectedItem != null && cb.Tag is Dictionary<string, object> valueMap)
+                    {
+                        string selectedText = cb.SelectedItem.ToString();
+                        if (valueMap.ContainsKey(selectedText))
+                        {
+                            hall_id = Convert.ToInt32(valueMap[selectedText]);
+                        }
+                    }
+                }
             }
             if (seat == -1 || row == -1 || hall_id == -1) return false;
 
@@ -699,15 +983,13 @@ namespace BD_1_2
                 SQLiteCommand cmd = new SQLiteCommand(query, sqliteConn);
                 SQLiteDataReader reader = cmd.ExecuteReader();
 
-                Dictionary<string, object> valueMap = new Dictionary<string, object>();
-
                 if (reader.Read())
                 {
                     row_n = int.Parse(reader["row_number"].ToString());
                     seat_n = int.Parse(reader["seat_number_in_row"].ToString());
                 }
                 else return false;
-                    reader.Close();
+                reader.Close();
 
                 if (seat > seat_n)
                 {
@@ -722,6 +1004,97 @@ namespace BD_1_2
             }
             catch
             {
+            }
+
+            return true;
+        }
+
+        private bool CheckSessionConflict(DateTime date, TimeSpan time, int hallId, int? excludeSessionId = null)
+        {
+            string dateStr = date.ToString("yyyy-MM-dd");
+            string timeStr = time.ToString(@"hh\:mm");
+
+            string query = @"SELECT COUNT(*) FROM Sessions 
+                    WHERE date_session = @date 
+                    AND start_time = @time 
+                    AND fk_id_cinema_hall = @hallId";
+
+            if (excludeSessionId.HasValue)
+            {
+                query += " AND id_session != @excludeId";
+            }
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(query, sqliteConn);
+                cmd.Parameters.AddWithValue("@date", dateStr);
+                cmd.Parameters.AddWithValue("@time", timeStr);
+                cmd.Parameters.AddWithValue("@hallId", hallId);
+
+                if (excludeSessionId.HasValue)
+                {
+                    cmd.Parameters.AddWithValue("@excludeId", excludeSessionId.Value);
+                }
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка проверки конфликта сеансов: {ex.Message}");
+                return false;
+            }
+        }
+
+        private bool ValidateSessionConflict()
+        {
+            DateTime sessionDate = DateTime.MinValue;
+            TimeSpan sessionTime = TimeSpan.Zero;
+            int hallId = -1;
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is DateTimePicker dtp && control.Name == "date_session")
+                {
+                    sessionDate = dtp.Value.Date;
+                }
+                else if (control is DateTimePicker timeDtp && control.Name == "start_time")
+                {
+                    sessionTime = timeDtp.Value.TimeOfDay;
+                }
+                else if (control is ComboBox cb && control.Name == "fk_id_cinema_hall")
+                {
+                    if (cb.SelectedItem != null && cb.Tag is Dictionary<string, object> valueMap)
+                    {
+                        string selectedText = cb.SelectedItem.ToString();
+                        if (valueMap.ContainsKey(selectedText))
+                        {
+                            hallId = Convert.ToInt32(valueMap[selectedText]);
+                        }
+                    }
+                }
+            }
+
+            if (sessionDate == DateTime.MinValue || sessionTime == TimeSpan.Zero || hallId == -1)
+            {
+                MessageBox.Show("Не удалось получить данные сеанса для проверки");
+                return false;
+            }
+
+            int? excludeId = null;
+            if (!isInsForm && recordId != null && recordId.Length > 0)
+            {
+                excludeId = recordId[0];
+            }
+
+            if (CheckSessionConflict(sessionDate, sessionTime, hallId, excludeId))
+            {
+                MessageBox.Show("В выбранном зале уже есть сеанс на это же время и дату!\n" +
+                               "Пожалуйста, выберите другое время, дату или зал.",
+                               "Конфликт сеансов",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+                return false;
             }
 
             return true;
