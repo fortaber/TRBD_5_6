@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "F:\\TRBD_5_6\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|f:\\trbd_5_6\\bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\twotableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\insedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -29,14 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\tableform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|solutionrelative:bd_1_2\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75A3AECB-5A60-4E1F-828C-5F70422677B4}|BD_1_2\\MyDatabase.csproj|F:\\TRBD_5_6\\bd_1_2\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,7 +58,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "TwoTableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\TwoTableForm.cs",
               "RelativeDocumentMoniker": "BD_1_2\\TwoTableForm.cs",
@@ -70,20 +70,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TwoTableForm.cs",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\TwoTableForm.cs",
               "RelativeDocumentMoniker": "BD_1_2\\TwoTableForm.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\TwoTableForm.cs*",
               "RelativeToolTip": "BD_1_2\\TwoTableForm.cs*",
-              "ViewState": "AgIAAH8BAAAAAAAAAAAQwJoBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAG8BAAAAAAAAAAAAAIEBAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-31T18:03:20.736Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "InsEdit.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\InsEdit.cs",
               "RelativeDocumentMoniker": "BD_1_2\\InsEdit.cs",
@@ -95,28 +95,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "InsEdit.cs",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\InsEdit.cs",
               "RelativeDocumentMoniker": "BD_1_2\\InsEdit.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\InsEdit.cs",
               "RelativeToolTip": "BD_1_2\\InsEdit.cs",
-              "ViewState": "AgIAABwCAAAAAAAAAAAwwC4CAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAJABAAAAAAAAAAAxwKgBAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T15:33:45.91Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Report.cs",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\Report.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Report.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\Report.cs",
               "RelativeToolTip": "BD_1_2\\Report.cs",
-              "ViewState": "AgIAAA8BAAAAAAAAAAAIwBsBAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:56:47.452Z"
+              "WhenOpened": "2025-10-25T12:56:47.452Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -127,24 +128,25 @@
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\Report.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "BD_1_2\\Report.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:49:54.182Z"
+              "WhenOpened": "2025-10-25T12:49:54.182Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Form1.cs",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\Form1.cs",
               "RelativeToolTip": "BD_1_2\\Form1.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAAAFwAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAUwCAAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-19T12:57:52.219Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\Form1.cs",
               "RelativeDocumentMoniker": "BD_1_2\\Form1.cs",
@@ -156,26 +158,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "TableForm.cs",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\TableForm.cs",
               "RelativeDocumentMoniker": "BD_1_2\\TableForm.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\TableForm.cs",
               "RelativeToolTip": "BD_1_2\\TableForm.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAiwJcAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAAEwBAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T17:49:23.257Z"
+              "WhenOpened": "2025-10-18T17:49:23.257Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "F:\\TRBD_5_6\\BD_1_2\\TableForm.cs",
               "RelativeDocumentMoniker": "BD_1_2\\TableForm.cs",
               "ToolTip": "F:\\TRBD_5_6\\BD_1_2\\TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "BD_1_2\\TableForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T12:58:00.269Z"
+              "WhenOpened": "2025-10-19T12:58:00.269Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
         }

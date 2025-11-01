@@ -146,7 +146,7 @@ namespace BD_1_2
                             dtp.MinDate = new DateTime(2020, 1, 1);
 
                         if (columnName == "buy_date" || columnName == "client_date_of_birth")
-                            dtp.MaxDate = DateTime.Now;
+                            dtp.MaxDate = DateTime.Now.AddDays(1);
                         else
                             dtp.MaxDate = new DateTime(2100, 1, 1); // для date_session
                         return dtp;
@@ -236,8 +236,52 @@ namespace BD_1_2
                 { "Не куплен", 0 }
             };
 
+            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             comboBox.SelectedIndex = 0;
             return comboBox;
+        }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem.ToString() == "Не куплен")
+            {
+                foreach (Control control in this.Controls)
+                {
+                    if (control.Name == "buy_date") {
+                        DateTimePicker dtp = control as DateTimePicker;
+                        dtp.Format = DateTimePickerFormat.Custom;
+                        dtp.CustomFormat = " ";
+                        dtp.Value = dtp.MinDate;
+                        dtp.Enabled = false;
+                    }
+                    if (control.Name == "fk_id_client")
+                    {
+                        ComboBox cb = control as ComboBox;
+                        cb.SelectedItem = " ";
+                        cb.SelectedIndex = -1;
+                        cb.Enabled = false;
+                    }
+                }
+            }
+            if ((sender as ComboBox).SelectedItem.ToString() == "Куплен")
+            {
+                foreach (Control control in this.Controls)
+                {
+                    if (control.Name == "buy_date")
+                    {
+                        DateTimePicker dtp = control as DateTimePicker;
+                        dtp.Format = DateTimePickerFormat.Long;
+                        dtp.Value = DateTime.Now;
+                        dtp.Enabled = true;
+                    }
+                    if (control.Name == "fk_id_client")
+                    {
+                        ComboBox cb = control as ComboBox;
+                        cb.SelectedIndex = 0;
+                        cb.Enabled = true;
+                    }
+                }
+            }
         }
 
         private ComboBox CreateAvailableComboBox()
@@ -378,6 +422,7 @@ namespace BD_1_2
                             continue;
 
                         string fieldName = control.Name;
+                        //MessageBox.Show(control.Name, reader[fieldName].ToString());
 
                         try
                         {
@@ -471,7 +516,7 @@ namespace BD_1_2
 
         private bool InsertRecord()
         {
-            if (!checkSeatsTable()) return false;
+            if (tableName == "Seats" && !checkSeatsTable()) return false;
 
             try
             {
@@ -481,7 +526,7 @@ namespace BD_1_2
                 foreach (Control control in this.Controls)
                 {
                     // Обрабатываем все элементы управления кроме меток
-                    if (control is Label)
+                    if (control is Label || control is Button)
                         continue;
 
                     string columnName = control.Name;
@@ -528,20 +573,20 @@ namespace BD_1_2
 
         private bool UpdateRecord()
         {
-            if (!checkSeatsTable()) return false;
+            if (tableName == "Seats" && !checkSeatsTable()) return false;
             try
             {
                 List<string> setClauses = new List<string>();
 
                 foreach (Control control in this.Controls)
                 {
-                    if (control is Label)
+                    if (control is Label || control is Button)
                         continue;
 
                     string columnName = control.Name;
                     string value = GetControlValue(control);
 
-                    if (!string.IsNullOrEmpty(value) && value != "NULL")
+                    if (!string.IsNullOrEmpty(value))
                     {
                         setClauses.Add($"\"{columnName}\" = {value}");
                     }
@@ -597,8 +642,9 @@ namespace BD_1_2
             {
                 if (control.Name.Contains("time"))
                     return $"'{dateTimePicker.Value:HH:mm}'";
-                else
+                else if (dateTimePicker.Value != dateTimePicker.MinDate)
                     return $"'{dateTimePicker.Value:yyyy-MM-dd}'";
+                else return "NULL";
             }
             else if (control is CheckBox checkBox)
             {

@@ -157,7 +157,7 @@ namespace MyDatabase
                     tableNameDB = "Genres";
                     break;
 
-                case "Фильмы-Жанры":
+                case "Фильмы - Жанры":
                     query = @"SELECT 
                 Movie_Genre.id_movie as 'ID фильма',
                 Movies.name as 'Фильм',

@@ -105,8 +105,8 @@ namespace MyDatabase
             if (!alreadyOpened)
             {
                 Form tableForm;
-                if(table == "Билеты")
-                    tableForm = new TwoTableForm(sqliteConn, "Билеты", "Клиенты");
+                if(table == "Билеты - Клиенты" || table == "Кинозалы - Типы залов" || table == "Фильмы - Возрастные рейтинги")
+                    tableForm = new TwoTableForm(sqliteConn, table); // + клиенты
                 else
                     tableForm = new TableForm(sqliteConn, table);
                 tableForm.MdiParent = this;

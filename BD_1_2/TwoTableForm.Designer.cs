@@ -150,7 +150,7 @@
             this.search_btn1.Size = new System.Drawing.Size(34, 34);
             this.search_btn1.Text = "Начать поиск";
             this.search_btn1.ToolTipText = "Начать поиск";
-            this.search_btn1.Click += new System.EventHandler(this.search_btn_Click_1);
+            this.search_btn1.Click += new System.EventHandler(this.ApplySearchFilter);
             // 
             // CloseButton
             // 
@@ -295,7 +295,7 @@
             this.search_btn2.Size = new System.Drawing.Size(34, 34);
             this.search_btn2.Text = "Начать поиск";
             this.search_btn2.ToolTipText = "Начать поиск";
-            this.search_btn2.Click += new System.EventHandler(this.search_btn2_Click);
+            this.search_btn2.Click += new System.EventHandler(this.ApplySearchFilter);
             // 
             // panel2
             // 
@@ -316,6 +316,7 @@
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "TwoTableForm";
             this.Text = "Данные таблицы ";
+            this.ResizeEnd += new System.EventHandler(this.OnResize);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

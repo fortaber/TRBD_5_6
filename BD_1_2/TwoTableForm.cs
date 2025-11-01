@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using BD_1_2;
 
@@ -8,19 +9,20 @@ namespace MyDatabase
 {
     public partial class TwoTableForm : Form
     {
-        public string table1NameDB;
-        public string table2NameDB;
         private SQLiteConnection sqliteConn;
         private SQLiteCommand command = new SQLiteCommand();
+        public string table1NameDB;
+        public string table2NameDB;
         private DataTable dt1 = new DataTable();
         private DataTable dt2 = new DataTable();
         private DataTable dt1Original = new DataTable();
         private DataTable dt2Original = new DataTable();
         private string query1;
         private string query2;
-        int CurrentIndex = 0;
+        int CurrentIndex1 = 0;
+        int CurrentIndex2 = 0;
 
-        public TwoTableForm(SQLiteConnection connection, string table1Name, string table2Name)
+        public TwoTableForm(SQLiteConnection connection, string table1Name)
         {
             InitializeComponent();
             if (connection == null || connection.State != ConnectionState.Open)
@@ -44,7 +46,7 @@ namespace MyDatabase
         {
             switch (tableName)
             {
-                case "Билеты":
+                case "Билеты - Клиенты":
                     query1 = @"SELECT 
                 Tickets.id_ticket as 'ID',
                 Movies.name as 'Фильм',
@@ -74,8 +76,8 @@ namespace MyDatabase
                     table1NameDB = "Tickets";
                     table2NameDB = "Clients";
                     break;
-                    /*
-                case "Кинозалы":
+                
+                case "Кинозалы - Типы залов":
                     query1 = @"SELECT 
                 Cinema_Halls.id_cinema_hall as 'Номер зала',
                 Hall_types.hall_type as 'Тип зала',
@@ -85,103 +87,38 @@ namespace MyDatabase
             FROM Cinema_Halls
             INNER JOIN Hall_types ON Cinema_Halls.fk_id_hall_type = Hall_types.id_hall_type
             ORDER BY Cinema_Halls.id_cinema_hall";
-                    table1NameDB = "Cinema_Halls";
-                    break;
-
-                case "Клиенты":
-                    query1 = @"SELECT 
-                Clients.id_client as 'ID',
-                Clients.client_full_name as 'ФИО',
-                Clients.client_date_of_birth as 'Дата рождения',
-                Clients.phone as 'Телефон',
-                Clients.email as 'эл.почта'
-            FROM Clients
-            ORDER BY Clients.id_client";
-                    table1NameDB = "Clients";
-                    break;
-
-                case "Фильмы":
-                    query1 = @"SELECT 
-                Movies.id_movie as 'ID',
-                Movies.name as 'Название фильма',
-                Age_ratings.age_rating as 'Возрастной рейтинг',
-                Movies.duration as 'Длительность (мин)',
-                Movies.release_year as 'Год выхода',
-                Movies.rating as 'Рейтинг'
-            FROM Movies
-            LEFT JOIN Age_ratings ON Movies.fk_id_age_rating = Age_ratings.id_age_rating
-            ORDER BY Movies.name";
-                    table1NameDB = "Movies";
-                    break;
-
-                case "Сеансы":
-                    query1 = @"SELECT 
-                Sessions.id_session as 'Номер сеанса',
-                Movies.name as 'Название фильма',
-                Cinema_Halls.id_cinema_hall as 'Номер зала',
-                Sessions.date_session as 'Дата сеанса',
-                Sessions.start_time as 'Время начала',
-                Sessions.price as 'Цена билета',
-                Sessions.report as 'Отчет'
-            FROM Sessions
-            LEFT JOIN Movies ON Sessions.fk_id_movie = Movies.id_movie
-            LEFT JOIN Cinema_Halls ON Sessions.fk_id_cinema_hall = Cinema_Halls.id_cinema_hall
-            ORDER BY Sessions.date_session, Sessions.start_time";
-                    table1NameDB = "Sessions";
-                    break;
-
-                case "Места":
-                    query1 = @"SELECT 
-                Seats.id_seat as 'ID',
-                Cinema_Halls.id_cinema_hall as 'Номер зала',
-                Seats.row as 'Ряд',
-                Seats.seat_in_row as 'Место'
-            FROM Seats
-            LEFT JOIN Cinema_Halls ON Seats.fk_id_cinema_hall = Cinema_Halls.id_cinema_hall
-            ORDER BY Cinema_Halls.id_cinema_hall, Seats.row, Seats.seat_in_row";
-                    table1NameDB = "Seats";
-                    break;
-
-                case "Возрастные рейтинги":
-                    query1 = @"SELECT 
-                Age_ratings.id_age_rating as 'ID',
-                Age_ratings.age_rating as 'Возрастной рейтинг',
-                Age_ratings.min_age as 'Мин. возраст'
-            FROM Age_ratings
-            ORDER BY Age_ratings.id_age_rating";
-                    table1NameDB = "Age_ratings";
-                    break;
-
-                case "Типы залов":
-                    query1 = @"SELECT 
+        
+                    query2 = @"SELECT 
                 Hall_types.id_hall_type as 'ID',
                 Hall_types.hall_type as 'Тип зала'
             FROM Hall_types
             ORDER BY Hall_types.id_hall_type";
-                    table1NameDB = "Hall_types";
+                    table1NameDB = "Cinema_Halls";
+                    table2NameDB = "Hall_types";
                     break;
 
-                case "Жанры":
-                    query1 = @"SELECT 
-                Genres.id_genre as 'ID',
-                Genres.genre as 'Название жанра'
-            FROM Genres
-            ORDER BY Genres.genre";
-                    table1NameDB = "Genres";
-                    break;
 
-                case "Фильмы-Жанры":
-                    query1 = @"SELECT 
-                Movie_Genre.id_movie as 'ID фильма',
-                Movies.name as 'Фильм',
-                Movie_Genre.id_genre as 'ID жанра',
-                Genres.genre as 'Жанр'
-            FROM Movie_Genre
-            LEFT JOIN Movies ON Movie_Genre.id_movie = Movies.id_movie
-            LEFT JOIN Genres ON Movie_Genre.id_genre = Genres.id_genre
-            ORDER BY Movies.name, Genres.genre";
-                    table1NameDB = "Movie_Genre";
-                    break;*/
+            case "Фильмы - Возрастные рейтинги":
+                query1 = @"SELECT 
+            Movies.id_movie as 'ID',
+            Movies.name as 'Название фильма',
+            Age_ratings.age_rating as 'Возрастной рейтинг',
+            Movies.duration as 'Длительность (мин)',
+            Movies.release_year as 'Год выхода',
+            Movies.rating as 'Рейтинг'
+        FROM Movies
+        LEFT JOIN Age_ratings ON Movies.fk_id_age_rating = Age_ratings.id_age_rating
+        ORDER BY Movies.name";
+
+                query2 = @"SELECT 
+            Age_ratings.id_age_rating as 'ID',
+            Age_ratings.age_rating as 'Возрастной рейтинг',
+            Age_ratings.min_age as 'Мин. возраст'
+        FROM Age_ratings
+        ORDER BY Age_ratings.id_age_rating";
+                table1NameDB = "Movies";
+                table2NameDB = "Age_ratings";
+                break;
 
                 default:
                     this.Close();
@@ -263,12 +200,15 @@ namespace MyDatabase
                 search_field_combobox2.SelectedIndex = 0;
         }
 
-        private void ApplySearchFilter()
+        private void ApplySearchFilter(object sender, EventArgs e) // зависит от sender
         {
-            if (dt1Original.Rows.Count == 0) return;
+            string btnName = (sender as ToolStripButton).Name;
+            DataTable dt = (btnName == "search_btn1" ? dt1 : dt2);
+            if (btnName == "search_btn1" && dt1Original.Rows.Count == 0) return;
+            if (btnName != "search_btn1" && dt2Original.Rows.Count == 0) return;
 
-            string searchText = search_textbox1.Text.Trim();
-            string selectedField = search_field_combobox1.SelectedItem?.ToString();
+            string searchText = (btnName == "search_btn1"? search_textbox1: search_textbox2).Text.Trim();
+            string selectedField = (btnName == "search_btn1" ? search_field_combobox1 : search_field_combobox2).SelectedItem?.ToString();
 
             if (string.IsNullOrEmpty(searchText) || string.IsNullOrEmpty(selectedField))
             {
@@ -278,17 +218,17 @@ namespace MyDatabase
                 return;
             }
 
-            dt1.Rows.Clear();
-            foreach (DataRow row in dt1Original.Rows)
+            dt.Rows.Clear();
+            foreach (DataRow row in (btnName == "search_btn1" ? dt1Original : dt2Original).Rows)
             {
                 string cellValue = row[selectedField]?.ToString() ?? "";
                 if (cellValue.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    dt1.ImportRow(row);
+                    dt.ImportRow(row);
                 }
             }
 
-            if (dt1.Rows.Count == 0)
+            if (dt.Rows.Count == 0)
             {
                 MessageBox.Show("Ничего не найдено", "Поиск",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -320,7 +260,7 @@ namespace MyDatabase
         {
             string btnName = (sender as ToolStripButton).Name;
             string TableName = btnName == "EditTable1" ? table1NameDB : table2NameDB;
-            DataGridView dataGridView = btnName == "EditTable1" ? dataGridView1 : dataGridView1;
+            DataGridView dataGridView = btnName == "EditTable1" ? dataGridView1 : dataGridView2;
             if (dataGridView.CurrentRow == null)
             {
                 MessageBox.Show("Выберите запись для редактирования");
@@ -343,11 +283,11 @@ namespace MyDatabase
             }
         }
 
-        private void DelTable_Click(object sender, EventArgs e) // TODO: зависит от sender
+        private void DelTable_Click(object sender, EventArgs e) // зависит от sender
         {
             string btnName = (sender as ToolStripButton).Name;
             string tableName = btnName == "DelTable1" ? table1NameDB : table2NameDB;
-            DataGridView dataGridView = btnName == "DelTable1" ? dataGridView1 : dataGridView1;
+            DataGridView dataGridView = btnName == "DelTable1" ? dataGridView1 : dataGridView2;
             DataTable dt = btnName == "DelTable1" ? dt1 : dt2;
 
             if (dataGridView.RowCount == 0)
@@ -356,7 +296,10 @@ namespace MyDatabase
             }
             if (dataGridView.RowCount != 0 && dataGridView.CurrentRow.Index != 0)
             {
-                CurrentIndex = dataGridView.CurrentRow.Index - 1;
+                if (btnName == "DelTable1")
+                    CurrentIndex1 = dataGridView.CurrentRow.Index - 1;
+                else
+                    CurrentIndex2 = dataGridView.CurrentRow.Index - 1;
             }
             try
             {
@@ -403,8 +346,8 @@ namespace MyDatabase
 
             if (dataGridView.RowCount != 0)
             {
-                dataGridView.CurrentCell =
-                    dataGridView.Rows[CurrentIndex].Cells[dataGridView.ColumnCount - 1];
+                dataGridView.CurrentCell = dataGridView.Rows[btnName == "DelTable1" ? CurrentIndex1 : CurrentIndex2]
+                    .Cells[dataGridView.ColumnCount - 1];
             }
 
         }
@@ -440,14 +383,9 @@ namespace MyDatabase
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void search_btn_Click_1(object sender, EventArgs e)
+        protected void OnResize(object sender, EventArgs e)
         {
-            ApplySearchFilter();
-        }
-
-        private void search_btn2_Click(object sender, EventArgs e)
-        {
-            ApplySearchFilter();
+            panel2.Height = panel1.Height / 2;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
