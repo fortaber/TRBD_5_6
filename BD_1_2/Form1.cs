@@ -93,7 +93,7 @@ namespace MyDatabase
             string table = (sender as ToolStripMenuItem).Text;
 
             bool alreadyOpened = false;
-            foreach (TableForm form in this.MdiChildren)
+            foreach (Form form in this.MdiChildren)
             {
                 if (form.Name == table)
                 {
@@ -104,7 +104,11 @@ namespace MyDatabase
 
             if (!alreadyOpened)
             {
-                TableForm tableForm = new TableForm(sqliteConn, table);
+                Form tableForm;
+                if(table == "Билеты")
+                    tableForm = new TwoTableForm(sqliteConn, "Билеты", "Клиенты");
+                else
+                    tableForm = new TableForm(sqliteConn, table);
                 tableForm.MdiParent = this;
                 tableForm.Show();
                 WriteStatus("Открыта таблица " + table);

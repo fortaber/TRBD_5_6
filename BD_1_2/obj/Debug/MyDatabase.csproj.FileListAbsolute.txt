@@ -100,3 +100,4 @@ C:\Users\kb123\source\repos\TRBD_5_6\BD_1_2\obj\Debug\MyDatabase.csproj.CoreComp
 C:\Users\kb123\source\repos\TRBD_5_6\BD_1_2\obj\Debug\MyDatabase.csproj.Up2Date
 C:\Users\kb123\source\repos\TRBD_5_6\BD_1_2\obj\Debug\BD_1_2.exe
 C:\Users\kb123\source\repos\TRBD_5_6\BD_1_2\obj\Debug\BD_1_2.pdb
+F:\TRBD_5_6\BD_1_2\obj\Debug\MyDatabase.TwoTableForm.resources

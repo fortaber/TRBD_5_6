@@ -94,6 +94,12 @@
     <Compile Include="Report.Designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="TwoTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwoTableForm.Designer.cs">
+      <DependentUpon>TwoTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwoTableForm.resx">
+      <DependentUpon>TwoTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>
